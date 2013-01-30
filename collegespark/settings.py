@@ -1,7 +1,11 @@
 # Django settings for collegespark project.
 
+import os.path
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+PWD = os.path.dirname(os.path.realpath(__file__ ))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -67,6 +71,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    PWD + "/static",
 )
 
 # List of finder classes that know how to find static files in
