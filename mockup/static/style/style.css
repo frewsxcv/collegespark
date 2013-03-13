@@ -1,5 +1,5 @@
 body {
-	background-image: url("pw_maze_white.png");
+	background-image: url("../img/pw_maze_white.png");
 }
 
 .foo {
@@ -15,7 +15,7 @@ body {
 
 #top-navbar .navbar-inner {
 	background-color: #5a9ecc;
-	background-image: url("download.png");
+	background-image: url("../img/download.png");
 	padding: 0;
 	min-height: 70px;
 }
