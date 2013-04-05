@@ -1,4 +1,4 @@
-Django==1.4.3
+Django==1.5.1
 gevent==0.13.8
 gevent-websocket==0.3.6
 gevent-socketio==0.3.5-rc2
