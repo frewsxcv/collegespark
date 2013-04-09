@@ -11,10 +11,10 @@ def index_view(request):
         return HttpResponseRedirect('/home')
     else:
         login_form  = LoginForm()
-        signup_from = SignUpForm()
+        signup_form = SignUpForm()
 
     ctx = {'login_form': login_form,
-           'signup_from': signup_from}
+           'signup_form': signup_form}
 
     return render_to_response('front.html', ctx,
            context_instance=RequestContext(request))
@@ -40,13 +40,13 @@ def login_validation(request):
 
 def signup_validation(request):
     signup_msg  = {}
-    signup_from = SignUpForm(request.POST)
+    signup_form = SignUpForm(request.POST)
 
-    if signup_from.is_valid():
-        email    = signup_from.cleaned_data['email']
-        school   = signup_from.cleaned_data['school']
-        password = signup_from.cleaned_data['password']
-        re_enter_password = signup_from.cleaned_data['re_enter_password']
+    if signup_form.is_valid():
+        email    = signup_form.cleaned_data['email']
+        school   = signup_form.cleaned_data['school']
+        password = signup_form.cleaned_data['password']
+        re_enter_password = signup_form.cleaned_data['re_enter_password']
 
     if is_user_exist(email):
         signup_msg['email'] = "This email address has been used"
