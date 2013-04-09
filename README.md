@@ -2,7 +2,7 @@
 
 Our senior project
 
-# Indenation Rules:
+# Indentation Rules:
 * Python
  * 4 spaces
 
