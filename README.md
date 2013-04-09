@@ -10,7 +10,7 @@ Our senior project
  * 3 spaces
 
 * Javascript
- *4 spaces
+ * 4 spaces
 
 If you are using sublime text 2 install SublimeLiter and make sure your code does not have any warnings
 from SublimeLiter. Exception only for inline variable initializer.  
