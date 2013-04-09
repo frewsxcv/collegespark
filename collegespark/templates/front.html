@@ -23,10 +23,12 @@
               <span class="icon-bar"></span>
             </a>
             <a class="brand" href="#">College Spark</a>
+            <form action="/loginValidation" method="POST">
+
             <div class="nav-collapse collapse" style="height: 0px;">
               <ul class="nav pull-right">
                 <li>
-                <input type="email" class="input-small" placeholder="Email">
+                {{ login_form.email }}
                 <div class="remeber-me">
                   <label class="checkbox">
                     <input type="checkbox"> Remember me
@@ -34,7 +36,7 @@
                 </div>
                 </li>
                 <li>
-                <input type="password" class="input-small" placeholder="Password">
+                {{ login_form.password }}
                 <label>
                   <a class="forgot-pass" href="#pass-modal" data-toggle="modal">Forgot your password?</a>
                 </label>
@@ -43,7 +45,9 @@
                 <button type="submit" class="btn">Login</button>
                 </li>
               </ul>
+            
             </div>
+            </form>
           </div>
         </div>
       </div>
