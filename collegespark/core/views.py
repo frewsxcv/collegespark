@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from forms               import LoginForm, SignUpForm
 from django.contrib.auth.models import User
 
+
 def index_view(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home')
@@ -12,15 +13,15 @@ def index_view(request):
         login_form  = LoginForm()
         signup_from = SignUpForm()
 
-    ctx = {'login_form' : login_form,
-           'signup_from' : signup_from
-    }
+    ctx = {'login_form': login_form,
+           'signup_from': signup_from}
 
     return render_to_response('front.html', ctx,
-           context_instance = RequestContext(request))
+           context_instance=RequestContext(request))
+
 
 def login_validation(request):
-    login_msg  = ""
+    login_msg = ""
     login_form = LoginForm(request.POST)
 
     if login_form.is_valid():
@@ -28,13 +29,14 @@ def login_validation(request):
         password = login_form.cleaned_data['password']
 
         user_auth = authenticate_user(email, password)
-        if user_auth is not None and userAuth.is_active:
+        if user_auth is not None and user_auth.is_active:
             login(request, user_auth)
             return HttpResponseRedirect('/home')
         else:
             login_msg = "email and password is wrong"
 
-    return HttpResponse(login_msg, mimetype = 'application/json')
+    return HttpResponse(login_msg, mimetype='application/json')
+
 
 def signup_validation(request):
     signup_msg  = {}
@@ -52,15 +54,22 @@ def signup_validation(request):
     if password != re_enter_password:
         signup_msg['password'] = "password are same"
 
-    if (signup_msg == {}):
-        signup_user({'email' : email,
-                     'school' : school,
-                     'password' : password
-                    })
+    if not signup_msg:
+        signup_user({'email': email,
+                     'school': school,
+                     'password': password})
+
+        user_auth = authenticate_user(email, password)
+        if user_auth is not None and user_auth.is_active:
+            login(request, user_auth)
+            return HttpResponseRedirect('/home')
+        else:
+            #TODO: I dont know what to do here
+            print "TODO: function signup_user"
 
         return HttpResponseRedirect('/home')
     else:
-        return HttpResponse(signup_msg, mimetype = 'application/json')
+        return HttpResponse(signup_msg, mimetype='application/json')
 
 
 def signup_user(user_info):
@@ -73,14 +82,6 @@ def signup_user(user_info):
     user.school = school
     user.save()
 
-    user_auth = authenticate_user(email, password)
-    if user_auth is not None and userAuth.is_active:
-        login(request, user_auth)
-        return HttpResponseRedirect('/home')
-    else:
-        #TODO: I dont know what to do here
-
-
 
 def is_user_exsit(email):
     if User.objects.filter(email=email).exists():
@@ -88,12 +89,12 @@ def is_user_exsit(email):
 
     return False
 
+
 def authenticate_user(email, password):
     try:
         user = User.objects.get(email=email)
         if user.check_password(password):
             return user
-    
-    except User.DoesNotExist:
-        return None 
 
+    except User.DoesNotExist:
+        return None
