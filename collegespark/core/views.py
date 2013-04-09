@@ -48,7 +48,7 @@ def signup_validation(request):
         password = signup_from.cleaned_data['password']
         re_enter_password = signup_from.cleaned_data['re_enter_password']
 
-    if is_user_exsit(email):
+    if is_user_exist(email):
         signup_msg['email'] = "This email address has been used"
 
     if password != re_enter_password:
@@ -83,7 +83,7 @@ def signup_user(user_info):
     user.save()
 
 
-def is_user_exsit(email):
+def is_user_exist(email):
     if User.objects.filter(email=email).exists():
         return True
 
