@@ -1,0 +1,9 @@
+[
+  {
+    "model": "core.School",
+    "pk": 1,
+    "fields": {
+      "name": "California Polytechnic State University, San Luis Obispo"
+    }
+  }
+]
