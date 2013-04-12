@@ -10,6 +10,8 @@
       <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/lib/bootstrap/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/lib/bootstrap/css/bootstrap-responsive.min.css">
       <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/front.css">
+      {% block css %}
+      {% endblock %}
    </head>
   
    <body>
@@ -28,11 +30,12 @@
                   <a class="brand" href="#">College Spark</a>
                   
                   <!-- login Form -->
-                  <form action="/loginValidation" method="POST">
+                  <form id="login-form" action="/login/validation" method="POST">
+                 
                      <div class="nav-collapse collapse" style="height: 0px;">
                         <ul class="nav pull-right">
                            <li>
-                              <input type="email" class="input-small" placeholder="Email">
+                              {{ login_form.email_login }}
                               <div class="remeber-me">
                                  <label class="checkbox">
                                      <input type="checkbox"> Remember me
@@ -41,7 +44,7 @@
                            </li>
                             
                            <li>
-                              <input type="password" class="input-small" placeholder="Password">
+                              {{ login_form.password_login }}
                               <label>
                                  <a class="forgot-pass" href="#pass-modal" data-toggle="modal">Forgot your password?</a>
                               </label>
@@ -139,6 +142,9 @@
       <!-- scripts -->
       <script src="{{ STATIC_URL }}/lib/jquery/jquery.min.js"></script>
       <script src="{{ STATIC_URL }}/lib/bootstrap/js/bootstrap.min.js"></script>
+      <script src="{{ STATIC_URL }}/js/base.js"></script>
+      {% block script %}
+      {% endblock %}
       <!-- end of scripts -->
       
    </body>

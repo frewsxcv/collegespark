@@ -1,4 +1,9 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
+
+{% block css %}
+   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/core/style.css">
+{% endblock %}
+
 
 {% block content %}
 
@@ -7,33 +12,33 @@
    <div id="signup-info" class="span6 offset1">
       <h1>Sign UP</h1>
       <h4>It is free and always will be.</h4>
-      <img src="pic.jpg" class="img-polaroid">
+      <img src="{{ STATIC_URL }}/img/happy-people.jpg" class="img-polaroid">
    </div>
 
    <div id="signup-form" class="span4 offset1">
-      <div class="form">
+      <form class="signup-form">
          <div class="control-group">
             <button class=".btn btn-facebook" type="button">Login with Facebook</button>
          </div>
          <div class="control-group">
-            <input type="email" placeholder="Your Email">
+            {{ signup_form.email_signup }}
          </div>
          <div class="control-group">
-            <input type="text" placeholder="Your School Name">
+            {{ signup_form.school_signup }}
          </div>
          <div class="control-group">
-            <input type="password" placeholder="Password">
+            {{ signup_form.password_signup }}
          </div>
          <div class="control-group">
-            <input type="password" placeholder="Re-enter Password">
+            {{ signup_form.re_enter_password_signup }}
          </div>
          <div class="control-group">
             <span class="help-block">By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy. </span>
          </div>
          <div class="control-group">
-            <button class="btn btn-success" type="button">Sign Up</button>
+            <button  type="submit" class="btn btn-success">Sign Up</button>
          </div>
-      </div>
+      </form>
    </div>
 </div>
 <!-- end of signup block -->
@@ -82,4 +87,9 @@
 </div>
 <!-- end of info block -->
 
+{% endblock %}
+
+{% block script %}
+<script src="http://alittlecode.com/files/jQuery-Validate-Demo/assets/js/jquery.validate.min.js"></script>
+<script src="{{ STATIC_URL }}/js/core/index.js"></script>
 {% endblock %}

@@ -1,14 +1,18 @@
-from django.shortcuts    import render_to_response
-from django.template     import RequestContext
-from django.http         import HttpResponseRedirect, HttpResponse
-from django.contrib.auth import login, logout, authenticate
-from forms               import LoginForm, SignUpForm
-from django.contrib.auth.models import User
+from django.shortcuts               import render_to_response
+from django.template                import RequestContext
+from django.http                    import HttpResponseRedirect, HttpResponse
+from django.contrib.auth            import login, logout, authenticate
+from forms                          import LoginForm, SignUpForm
+from django.contrib.auth.decorators import login_required
+from models                         import User, School
+import json
 
 
 def index_view(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/home')
+        print "whyyyyyyyyyyyyyy"
+        school_url = '/{}'.format(request.user.school.name)
+        return HttpResponseRedirect(school_url)
     else:
         login_form  = LoginForm()
         signup_form = SignUpForm()
@@ -16,26 +20,44 @@ def index_view(request):
     ctx = {'login_form': login_form,
            'signup_form': signup_form}
 
-    return render_to_response('front.html', ctx,
-           context_instance=RequestContext(request))
+    return render_to_response(
+        'core/index.html', ctx, context_instance=RequestContext(request))
+
+
+def dashboard_view(request, school_name):
+    print school_name
+    return render_to_response(
+        'core/home.html', context_instance=RequestContext(request))
 
 
 def login_validation(request):
-    login_msg = ""
+    print "=========================="
+    next       = ""
+    login_msg  = {}
     login_form = LoginForm(request.POST)
 
-    if login_form.is_valid():
-        email    = login_form.cleaned_data['email']
-        password = login_form.cleaned_data['password']
+    if 'next' in request.GET:
+        next = request.GET['next']
 
-        user_auth = authenticate_user(email, password)
+    if login_form.is_valid():
+        email    = request.POST['email_login']
+        password = request.POST['password_login']
+        user_auth = authenticate(username=email, password=password)
+
         if user_auth is not None and user_auth.is_active:
             login(request, user_auth)
-            return HttpResponseRedirect('/home')
+            if next != "":
+                login_msg['redirect_url'] = next
+            else:
+                login_msg['redirect_url'] = '/{}'.format(request.user.school.name)
         else:
-            login_msg = "email and password is wrong"
+            login_msg['error'] = "email and password is wrong"
 
-    return HttpResponse(login_msg, mimetype='application/json')
+    else:
+        login_msg['error'] = "something went wrong!"
+
+    jsonCtx = json.dumps(login_msg)
+    return HttpResponse(jsonCtx, mimetype='application/json')
 
 
 def signup_validation(request):
@@ -43,33 +65,50 @@ def signup_validation(request):
     signup_form = SignUpForm(request.POST)
 
     if signup_form.is_valid():
-        email    = signup_form.cleaned_data['email']
-        school   = signup_form.cleaned_data['school']
-        password = signup_form.cleaned_data['password']
-        re_enter_password = signup_form.cleaned_data['re_enter_password']
+        email    = request.POST['email']
+        school   = request.POST['school']
+        password = request.POST['password']
+        re_enter_password = request.POST['re_enter_password']
 
     if is_user_exist(email):
         signup_msg['email'] = "This email address has been used"
 
     if password != re_enter_password:
-        signup_msg['password'] = "password are same"
+        signup_msg['password'] = "password and re-enter password are same"
 
     if not signup_msg:
         signup_user({'email': email,
                      'school': school,
                      'password': password})
 
-        user_auth = authenticate_user(email, password)
+        user_auth = authenticate(username=email, password=password)
         if user_auth is not None and user_auth.is_active:
             login(request, user_auth)
-            return HttpResponseRedirect('/home')
+            school_url = '/{}'.format(school)
+            return HttpResponseRedirect(school_url)
+
         else:
             #TODO: I dont know what to do here
             print "TODO: function signup_user"
-
-        return HttpResponseRedirect('/home')
     else:
         return HttpResponse(signup_msg, mimetype='application/json')
+
+
+def email_validation(request):
+    email = request.POST['email_signup']
+    if is_user_exist(email):
+        ctx = True
+    else:
+        ctx = False
+
+    jsonCtx = json.dumps(ctx)
+    return HttpResponse(jsonCtx, mimetype='application/json')
+
+
+def logout_view(request):
+    print "**************"
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 def signup_user(user_info):
@@ -78,23 +117,16 @@ def signup_user(user_info):
     password = user_info['password']
     username = email.split('@')[0]
 
-    user = User.objects.create_user(username, email, password)
-    user.school = school
-    user.save()
+    user = User.objects.create_user(email, username=username, school=school, password=password)
 
 
 def is_user_exist(email):
-    if User.objects.filter(email=email).exists():
+    obj = User.objects.filter(email=email)
+    if obj.exists():
         return True
 
     return False
 
-
-def authenticate_user(email, password):
-    try:
-        user = User.objects.get(email=email)
-        if user.check_password(password):
-            return user
-
-    except User.DoesNotExist:
-        return None
+def get_user_schoolname(id):
+    school = School.objects.get(id=id)
+    return school.name

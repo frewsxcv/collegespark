@@ -2,26 +2,27 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(
+    email_login = forms.EmailField(widget=forms.TextInput(
         attrs={'type': 'email',
                'class': 'input-small',
                'placeholder': 'Email'}))
 
-    password = forms.CharField(widget=forms.PasswordInput(
+    password_login = forms.CharField(widget=forms.PasswordInput(
         render_value=False, attrs={'class': 'input-small',
                                    'placeholder': 'Password'}))
 
 
 class SignUpForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(
+    email_signup = forms.EmailField(widget=forms.TextInput(
         attrs={'type': 'email',
                'placeholder': 'Your Email'}))
 
-    school = forms.CharField(widget=forms.PasswordInput(
+    school_signup = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'Your School Name'}))
 
-    password = forms.CharField(widget=forms.PasswordInput(
-        render_value=False, attrs={'placeholder': 'Password'}))
+    password_signup = forms.CharField(widget=forms.PasswordInput(
+        render_value=False, attrs={'class': 'password',
+                                   'placeholder': 'Password'}))
 
-    re_enter_password = forms.CharField(widget=forms.PasswordInput(
+    re_enter_password_signup = forms.CharField(widget=forms.PasswordInput(
         render_value=False, attrs={'placeholder': 'Re-enter Password'}))
