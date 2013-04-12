@@ -96,10 +96,7 @@ def signup_validation(request):
 
 def email_validation(request):
     email = request.POST['email_signup']
-    if is_user_exist(email):
-        ctx = True
-    else:
-        ctx = False
+    ctx = not is_user_exist(email)
 
     jsonCtx = json.dumps(ctx)
     return HttpResponse(jsonCtx, mimetype='application/json')
@@ -121,11 +118,7 @@ def signup_user(user_info):
 
 
 def is_user_exist(email):
-    obj = User.objects.filter(email=email)
-    if obj.exists():
-        return True
-
-    return False
+    return User.objects.filter(email=email).exists()
 
 def get_user_schoolname(id):
     school = School.objects.get(id=id)
