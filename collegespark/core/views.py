@@ -96,7 +96,7 @@ def signup_validation(request):
 
 def email_validation(request):
     email = request.POST['email_signup']
-    ctx = is_user_exist(email)
+    ctx = not is_user_exist(email)
 
     jsonCtx = json.dumps(ctx)
     return HttpResponse(jsonCtx, mimetype='application/json')
