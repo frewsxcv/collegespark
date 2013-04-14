@@ -3,3 +3,4 @@
 django-env/
 .DS_*
 *.sqlite
+collegespark/settings.py
