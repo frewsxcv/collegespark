@@ -3,7 +3,7 @@ from django.template                import RequestContext
 from django.http                    import HttpResponseRedirect, HttpResponse
 from django.contrib.auth            import login, logout, authenticate
 from forms                          import LoginForm, SignUpForm
-from django.contrib.auth.decorators import login_required
+#from django.contrib.auth.decorators import login_required
 from models                         import User, School
 import json
 
@@ -26,8 +26,9 @@ def index_view(request):
 
 def dashboard_view(request, school_name):
     print school_name
+    ctx = {'school_name': school_name}
     return render_to_response(
-        'core/home.html', context_instance=RequestContext(request))
+        'core/home.html', ctx, context_instance=RequestContext(request))
 
 
 def login_validation(request):
@@ -40,8 +41,8 @@ def login_validation(request):
         next = request.GET['next']
 
     if login_form.is_valid():
-        email    = request.POST['email_login']
-        password = request.POST['password_login']
+        email     = request.POST['email_login']
+        password  = request.POST['password_login']
         user_auth = authenticate(username=email, password=password)
 
         if user_auth is not None and user_auth.is_active:
@@ -49,7 +50,8 @@ def login_validation(request):
             if next != "":
                 login_msg['redirect_url'] = next
             else:
-                login_msg['redirect_url'] = '/{}'.format(request.user.school.name)
+                login_msg['redirect_url'] = '/{}'.format(
+                    request.user.school.name)
         else:
             login_msg['error'] = "email and password is wrong"
 
@@ -70,7 +72,7 @@ def signup_validation(request):
         password = request.POST['password']
         re_enter_password = request.POST['re_enter_password']
 
-    if is_user_exist(email):
+    if is_email_exist(email):
         signup_msg['email'] = "This email address has been used"
 
     if password != re_enter_password:
@@ -96,7 +98,7 @@ def signup_validation(request):
 
 def email_validation(request):
     email = request.POST['email_signup']
-    ctx = not is_user_exist(email)
+    ctx   = not is_email_exist(email)
 
     jsonCtx = json.dumps(ctx)
     return HttpResponse(jsonCtx, mimetype='application/json')
@@ -114,11 +116,15 @@ def signup_user(user_info):
     password = user_info['password']
     username = email.split('@')[0]
 
-    user = User.objects.create_user(email, username=username, school=school, password=password)
+    user = User.objects.create_user(
+        email, username=username, school=school, password=password)
+
+    return user
 
 
-def is_user_exist(email):
+def is_email_exist(email):
     return User.objects.filter(email=email).exists()
+
 
 def get_user_schoolname(id):
     school = School.objects.get(id=id)

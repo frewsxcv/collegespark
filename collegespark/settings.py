@@ -11,7 +11,7 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-MANAGERS = ADMIN
+MANAGERS = ADMINS
 
 DATABASES = {
     'default': {

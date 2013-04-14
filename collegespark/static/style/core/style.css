@@ -12,3 +12,94 @@ label.error {
     color: red;
     margin-bottom: 5px;
 }
+
+
+/******* Home **************/
+#welcome-bar {
+    background-color: rgb(168, 184, 204);
+}
+
+#welcome-bar .welcome-text {
+    font-size: 20px;
+    font-weight: bold;
+    border-left: 1px solid  rgb(159, 170, 184);
+    border-right: 1px solid  rgb(159, 170, 184);
+}
+
+#welcome-bar .welcome-text > a, 
+#welcome-bar .nav-menu .menu > a {
+   color: rgb(238, 238, 238);
+   font-weight: bold;
+}
+
+#welcome-bar .welcome-text > a:hover, 
+#welcome-bar .nav-menu .menu > a:hover {
+   color: #5a9ecc;
+   border-radius: 0px;
+}
+
+#welcome-bar .nav-menu .menu {
+   float: right;
+   border-left: 1px solid  rgb(159, 170, 184);
+   width: 140px;
+}
+
+#welcome-bar .nav-menu .nav-pills {
+   margin-bottom: 0px;
+}
+
+#welcome-bar .nav-menu .menu:first-child {
+   border-right: 1px solid  rgb(159, 170, 184);
+
+}
+
+/* Options*/
+#menu .side-menu {
+   background-color: white;
+    padding: 20px 0 20px 0;
+    border: 1px solid lightgray;
+}
+
+#menu .menu-item {
+    height: 50px;
+}
+
+#menu .menu-box {
+    width: 82px;
+    height: 42px;
+    background: black;
+    float: left;
+    margin-left: -6px;
+}
+
+#menu .menu-text{
+    margin: 10px 0px 0px 10px;
+    color: #3F4140;
+    float: left;
+    font-size: 20px;
+
+}
+
+#menu .menu-book {
+    background: #FBB917;
+}
+
+#menu .menu-chat {
+    background: #2B60DE;
+}
+
+#menu .menu-discussion {
+    background: #347C2C;
+}
+
+#menu .slides {
+   height: 190px;
+   background-color: white;
+   border: 1px solid lightgray;
+}
+
+.new-update {
+   background-color: white;
+    height: 200px;
+    border: 1px solid lightgray
+}

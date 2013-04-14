@@ -6,6 +6,11 @@ from forms               import BookInfoForm
 from django.contrib.auth.models import User
 
 
+def book_view(request, school_name):
+    return render_to_response(
+        'book/book.html', context_instance=RequestContext(request))
+
+
 def add_book_view(request, school_name):
     if request.user.is_authenticated():
         bookInfo_form = BookInfoForm()
