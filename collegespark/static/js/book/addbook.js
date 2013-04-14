@@ -13,15 +13,15 @@ $("#id_image").change(function () {
       });
 
       $("#addBook-StepOne").change(function() {
-         if ($.trim($("#id_school_name").val()) == "" ||
-            $.trim($("#id_dpt_name").val()) == "" ||
-            $.trim($("#id_class_name").val()) == "") {
+         if ($.trim($("#id_school_name").val()) === "" ||
+            $.trim($("#id_dpt_name").val()) === "" ||
+            $.trim($("#id_class_name").val()) === "") {
                $('#stepone-next').hide(300);
          }
          else {
             $('#stepone-next').show(300);
          }
-      })
+      });
 
      $('#stepone-next').click(function() { 
         $('#myWizard').wizard('next');
@@ -31,17 +31,17 @@ $("#id_image").change(function () {
      });
 
      $("#addBook-StepTwo").change(function() {
-         if ($.trim($("#id_book_name").val()) == "" ||
-            $.trim($("#id_author").val()) == "" ||
-            $.trim($("#id_ISBN").val()) == "" ||
-            $.trim($("#id_price").val()) == "" ||
-            $("#id_image").val() == "") {
+         if ($.trim($("#id_book_name").val()) === "" ||
+            $.trim($("#id_author").val()) === "" ||
+            $.trim($("#id_ISBN").val()) === "" ||
+            $.trim($("#id_price").val()) === "" ||
+            $("#id_image").val() === "") {
                $('#steptwo-next').hide(300);
          }
          else {
             $('#steptwo-next').show(300);
          }
-      })
+      });
 
     $('#steptwo-next').click(function() { 
        $('#myWizard').wizard('next');

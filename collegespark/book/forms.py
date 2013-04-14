@@ -4,7 +4,6 @@ CHOICES = (('1', 'New',), ('2', 'Used',))
 
 
 class BookInfoForm(forms.Form):
-    seller = forms.CharField(required=True)
     school_name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'input-school', 'placeholder': 'Enter a School Name'}), required=True)
     dpt_name = forms.CharField(widget=forms.TextInput(
