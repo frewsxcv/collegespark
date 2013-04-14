@@ -11,7 +11,7 @@ import json
 def index_view(request):
     if request.user.is_authenticated():
         print "whyyyyyyyyyyyyyy"
-        school_url = '/{}'.format(request.user.school.name)
+        school_url = '/{}'.format(request.user.school.short_name)
         return HttpResponseRedirect(school_url)
     else:
         login_form  = LoginForm()
@@ -51,7 +51,7 @@ def login_validation(request):
                 login_msg['redirect_url'] = next
             else:
                 login_msg['redirect_url'] = '/{}'.format(
-                    request.user.school.name)
+                    request.user.school.short_name)
         else:
             login_msg['error'] = "email and password is wrong"
 
@@ -124,8 +124,3 @@ def signup_user(user_info):
 
 def is_email_exist(email):
     return User.objects.filter(email=email).exists()
-
-
-def get_user_schoolname(id):
-    school = School.objects.get(id=id)
-    return school.name

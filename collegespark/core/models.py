@@ -14,7 +14,8 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, username, password):
         print School.objects.all()
         school = School.objects.filter(id=1)[0]
-        user = self.create_user(email, username=username, school=school, password=password)
+        user   = self.create_user(
+            email, username=username, school=school, password=password)
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -62,8 +63,8 @@ class User(AbstractBaseUser):
 
 
 class School(models.Model):
-    name = models.CharField(max_length=40, unique=True, blank=False)
-    #shor_name = models.CharField(max_length=20, unique=True, blank=False)
+    name       = models.CharField(max_length=40, unique=True, blank=False)
+    short_name = models.CharField(max_length=20, unique=True, blank=False)
 
     def __repr__(self):
         return "<School '{}'>".format(self.name)
