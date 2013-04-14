@@ -18,11 +18,13 @@
 }
 
 #stepone-next {
+	display: none;
 	width: 70%;
 	margin: 20px 0px 20px 0px;
 }
 
 #steptwo-next {
+	display: none;
 	width: 70%;
 	margin: 20px 0px 20px 0px;
 }
