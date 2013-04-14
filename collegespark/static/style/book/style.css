@@ -1,0 +1,49 @@
+.step-content {
+	border: 1px solid lightgray;
+	background-color: whiteSmoke;
+}
+
+#step-title {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 0px 30px 0px;
+}
+
+#step-content {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: bold;
+    font-size: 20px;
+    margin: 20px 0px 20px 0px;
+}
+
+#stepone-next {
+	width: 70%;
+	margin: 20px 0px 20px 0px;
+}
+
+#steptwo-next {
+	width: 70%;
+	margin: 20px 0px 20px 0px;
+}
+
+#steptwo-pre {
+	width: 70%;
+	margin: 20px 0px 20px 0px;
+}
+
+#stepthree-confirm {
+	width: 70%;
+	margin: 20px 0px 20px 0px;
+}
+
+#stepthree-pre {
+	width: 70%;
+	margin: 20px 0px 20px 0px;
+}
+
+.summary-info {
+	font-weight: 100;
+	color:grey;
+	margin:0px 0px 0px 10px;
+}

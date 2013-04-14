@@ -1,21 +1,23 @@
 from django.db import models
+from django.core.models import School, User
 
 
-class book(models.Model):
+class Book(models.Model):
     def url(self, filename):
-        route = "MultimediaData/Books/%s/%s"%(self.name, str(filename))
+        route = "MultimediaData/Books/%s/%s/"%(self.school_name, str(filename))
         return route
 
-    school_name = models.CharField(max_length=40)
-    dpt_name = models.CharField(max_length=40)
-    class_name = models.CharField(max_length=20)
-    book_name = models.CharField(max_length=40)
-    author = models.CharField(max_length=20)
-    ISBN = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    decription = models.TextField(max_length=300)
-    condition = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=url, null=True, blank=True)
+    seller = models.ForeignKey('core.User')
+    school_name = models.ForeignKey('core.School')
+    dpt_name = models.CharField(max_length=40, blank=False)
+    class_name = models.CharField(max_length=20, blank=False)
+    book_name = models.CharField(max_length=40, blank=False)
+    author = models.CharField(max_length=20, blank=False)
+    ISBN = models.CharField(max_length=20, blank=False)
+    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False)
+    decription = models.TextField(max_length=300, blank=False)
+    condition = models.BooleanField(default=False, blank=False)
+    image = models.ImageField(upload_to=url, null=True, blank=False)
 
     def __unicode__(self):
-        return self.name
+        return self.book_name
