@@ -1,26 +1,13 @@
-# College Spark
+# collegespark
 
-Our senior project
+A Clojure library designed to ... well, that part is up to you.
 
-# Indentation Rules:
-* Python
- * 4 spaces
+## Usage
 
-* HTML
- * 3 spaces
+FIXME
 
-* Javascript
- * 4 spaces
+## License
 
-If you are using sublime text 2 install SublimeLiter and make sure your code does not have any warnings
-from SublimeLiter. Exception only for inline variable initializer.  
+Copyright © 2013 FIXME
 
-# Install
-
-* Install the dependencies for gevent:
-
- * If you're on Ubuntu: `sudo apt-get install libevent-dev python-all-dev`
-
-* Install the virtual environment
-
-* Install the Python libraries: `pip install -r requirements.txt`
+Distributed under the Eclipse Public License, the same as Clojure.
