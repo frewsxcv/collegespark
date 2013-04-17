@@ -7,15 +7,17 @@ from django.contrib.auth.models import User
 
 
 def book_view(request, school_name):
+    print "book view"
     return render_to_response(
         'book/book.html', context_instance=RequestContext(request))
 
-
+#@login_required
 def add_book_view(request, school_name):
+    print "-------test -----"
     if request.user.is_authenticated():
         bookInfo_form = BookInfoForm()
     else:
-        print ("haha")
+        print "out"
         return HttpResponseRedirect('/')
 
     ctx = {'bookInfo_form': bookInfo_form}
