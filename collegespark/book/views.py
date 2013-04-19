@@ -22,7 +22,7 @@ def add_book_view(request, school_name):
 
     ctx = {'bookInfo_form': bookInfo_form}
 
-    return render_to_response('book/addbook.html', ctx, context_instance=RequestContext(request))
+    return render_to_response('book/addBook.html', ctx, context_instance=RequestContext(request))
 
 '''
 def add_Book_toDB_view(request):
