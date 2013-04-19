@@ -6,5 +6,5 @@ urlpatterns = patterns('collegespark.core.views',
     url(r'^login/validation$', 'login_validation'),
     url(r'^signup/validation$', 'signup_validation'),
     url(r'^email/validation$', 'email_validation'),
-    url(r'^(?P<school_name>\w+)$', 'dashboard_view', name='dashboard')
+    url(r'^(?P<school_name>\w+)/?$', 'dashboard_view', name='dashboard')
 )
