@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{%block title %} 
+   Welcome to Home page 
+{% endblock %}
+
+{% block css %}
+   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/lib/wysihtml5/css/wysihtml5-0.0.2.css">
+   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/discussion/style.css">
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+   <div class="discussion-form span12">
+      <form action="." id="post-discussion-form" class="form-horizontal">
+         <fieldset  class="well the-fieldset">
+
+            <legend class="the-legend">School Information</legend>
+
+            Please Enter your department and class name
+            <hr>
+
+            <div class="control-group">
+               <label class="control-label" for="inputDepartment">Department</label>
+               <div class="controls">
+                  <div class="input-append">
+                     <input type="text" class="inputDepartment" placeholder="Department" >
+                     <span class="add-on">*</span>
+                  </div>
+
+                  <a href="#" id="example" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                     <i class="icon-question-sign"></i>
+                  </a>   
+               </div>
+            </div>
+
+            <div class="control-group">
+               <label class="control-label" for="inputClass">Class</label>
+               <div class="controls">
+                  <div class="input-append">
+                     <input type="text" class="inputClass" placeholder="Enter your class">
+                     <span class="add-on">optional</span>
+                  </div>
+
+                  <a href="#" id="example" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                     <i class="icon-question-sign"></i>
+                  </a>
+               </div>
+            </div>
+
+
+            Please Enter the topic and post
+            <hr>
+
+            <div class="control-group">
+               <label class="control-label" for="inputDepartment">Title:</label>
+               <div class="controls">
+                  <div class="input-append">
+                     <input class="input-xxlarge" type="text" class="inputTopic" placeholder="Please enter your topic">
+                     <span class="add-on">*</span>
+                  </div>
+
+                  <a href="#" id="example" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                     <i class="icon-question-sign"></i>
+                  </a>
+
+               </div>
+            </div>
+
+            <div class="control-group">
+               <label class="control-label" for="inputDepartment">Post:</label>
+               <div class="controls">
+                  <textarea id="textarea" class="post-description" placeholder="Enter text ..."></textarea>
+                  <span class="add-on">*</span>
+                  <a href="#" id="example" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                     <i class="icon-question-sign"></i>
+                  </a>
+               </div>
+            </div>
+
+
+            <div class="control-group">
+               <div class="controls">
+                  <button  type="submit" class="btn btn btn-info">Post</button>
+                  <button  type="rest" class="btn">Rest</button>
+               </div>
+            </div>
+
+         </fieldset>
+      </form>
+   </div>
+<div>
+{% endblock %}
+   
+{% block script %}
+
+   <script src="{{ STATIC_URL }}/lib/wysihtml5/js/wysihtml5-0.3.0.js"></script>
+   <script src="{{ STATIC_URL }}/lib/wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>
+
+   <script src="{{ STATIC_URL }}/js/discussion/postdiscussion.js"></script>
+{% endblock %}
