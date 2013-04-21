@@ -24,7 +24,7 @@
                <label class="control-label" for="inputDepartment">Department</label>
                <div class="controls">
                   <div class="input-append">
-                     <input type="text" class="inputDepartment" placeholder="Department" >
+                     {{ discussionForm.department }}
                      <span class="add-on">*</span>
                   </div>
 
@@ -38,7 +38,7 @@
                <label class="control-label" for="inputClass">Class</label>
                <div class="controls">
                   <div class="input-append">
-                     <input type="text" class="inputClass" placeholder="Enter your class">
+                     {{ discussionForm.class_name }}
                      <span class="add-on">optional</span>
                   </div>
 
@@ -56,7 +56,7 @@
                <label class="control-label" for="inputDepartment">Title:</label>
                <div class="controls">
                   <div class="input-append">
-                     <input class="input-xxlarge" type="text" class="inputTopic" placeholder="Please enter your topic">
+                     {{ discussionForm.post_topic }}
                      <span class="add-on">*</span>
                   </div>
 
@@ -70,7 +70,7 @@
             <div class="control-group">
                <label class="control-label" for="inputDepartment">Post:</label>
                <div class="controls">
-                  <textarea id="textarea" class="post-description" placeholder="Enter text ..."></textarea>
+                  {{ discussionForm.post_body }}
                   <span class="add-on">*</span>
                   <a href="#" id="example" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
                      <i class="icon-question-sign"></i>
