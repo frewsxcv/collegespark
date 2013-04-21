@@ -8,6 +8,7 @@ class Book(models.Model):
         return route
 
     seller = models.ForeignKey('core.User')
+    isSold = models.BooleanField(default=False, blank=False)
     dpt_name = models.CharField(max_length=40, blank=False)
     class_name = models.CharField(max_length=20, blank=False)
     book_name = models.CharField(max_length=40, blank=False)

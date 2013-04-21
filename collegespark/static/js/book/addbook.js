@@ -1,3 +1,23 @@
+$(document).ready(function () {
+    $.validator.addMethod("checkDecimal",
+        function() {
+             var intRegex = /^\d+(\.\d{0,2})?$/;
+             var original = $('#id_price').val();
+             if (original < 0)
+             {
+                 return false;
+             }
+             if (!original.match(intRegex))
+             {
+                 return false;
+             }
+             else
+             {
+                 return true;
+             }
+        });
+});
+
 $("#id_image").change(function () {
    var input = document.getElementById("id_image");
       if (input.files && input.files[0]) {
@@ -36,7 +56,8 @@ $('#addbook-form').validate({
         },
         price: {
             required: true,
-            number: true
+            number: true,
+            checkDecimal: true
         },
         description: {
             required: true
@@ -46,8 +67,12 @@ $('#addbook-form').validate({
         dpt_name: "department name is required",
         class_name: "class name is required",
         book_name: "book name is required",
-        price: "book price is required and must be number",
-        description: "book description is required"
+        description: "book description is required",
+        price: {
+            required: "book price is required",
+            number: "book price must be a number",
+            checkDecimal: "book price must be a non-negative number with only 2 decimal places"
+        }
     },
     highlight: function(element) {
         $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -67,6 +92,8 @@ $('#addbook-form').validate({
             $("#sum-book").text($('#id_book_name').val());
             $("#sum-author").text($('#id_author').val());
             $("#sum-ISBN").text($('#id_ISBN').val());
+            var myPrice = parseFloat($('#id_price').val()).toFixed(2);
+            $('#id_price').val(myPrice);
             $("#sum-price").text($('#id_price').val());
             $("#sum-description").text($('#id_description').val());
 
