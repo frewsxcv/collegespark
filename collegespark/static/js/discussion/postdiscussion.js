@@ -1,6 +1,7 @@
 $(function () {
     $('#id_post_body').wysihtml5();
-    $('#example').popover();
+
+    $('.help-text').popover();
 
     console.log();
     $('#post-discussion-form').submit(function(e) {
