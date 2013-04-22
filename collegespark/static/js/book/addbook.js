@@ -23,7 +23,7 @@ $("#id_image").change(function () {
       if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function (e) {
-            $('#sum-image')
+            $('.sum-image')
                   .attr('src', e.target.result)
                   .width(400)
                   .height(300);
@@ -32,11 +32,11 @@ $("#id_image").change(function () {
       }
 });
 
-$('#steptwo-pre').click(function() {
+$('.steptwo-btn .pre .btn').click(function() {
    $('#myWizard').wizard('previous');
 });
 
-$('#stepthree-pre').click(function() {
+$('.stepthree-btn .pre .btn').click(function() {
    $('#myWizard').wizard('previous');
 });
 
@@ -84,24 +84,24 @@ $('#addbook-form').validate({
     submitHandler: function(form) {
         var step = $('#myWizard').wizard('selectedItem').step;
         if (step == 1) {
-            $("#sum-dpt").text($('#id_dpt_name').val());
-            $("#sum-class").text($('#id_class_name').val());
+            $(".sum-dpt").text($('#id_dpt_name').val());
+            $(".sum-class").text($('#id_class_name').val());
             $('#myWizard').wizard('next');
         }
         else if (step == 2) {
-            $("#sum-book").text($('#id_book_name').val());
-            $("#sum-author").text($('#id_author').val());
-            $("#sum-ISBN").text($('#id_ISBN').val());
+            $(".sum-book").text($('#id_book_name').val());
+            $(".sum-author").text($('#id_author').val());
+            $(".sum-ISBN").text($('#id_ISBN').val());
             var myPrice = parseFloat($('#id_price').val()).toFixed(2);
             $('#id_price').val(myPrice);
-            $("#sum-price").text($('#id_price').val());
-            $("#sum-description").text($('#id_description').val());
+            $(".sum-price").text($('#id_price').val());
+            $(".sum-description").val($('#id_description').val());
 
             if ($('#id_condition').val() == 1) {
-                $("#sum-condition").text('New');
+                $(".sum-condition").text('New');
             }
             else {
-                $("#sum-condition").text('Used');
+                $(".sum-condition").text('Used');
             }
             $('#myWizard').wizard('next');
         }
