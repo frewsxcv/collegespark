@@ -35,8 +35,8 @@
 	 </div>
 
 
-	 <form action = "." method = "POST" id = "addbook-form">
-
+	 <form method = "POST" id = "addbook-form">
+	 		{% csrf_token %}
 			<div class="step-content">
 
 				 <div class="step-pane active" id="step1">
@@ -138,18 +138,15 @@
 								 <div class="row-fluid">
 										<div class="span11 offset1">
 											 <div class="addBook-StepThree">
-													<div class="step-title"> Summary</div>
-														 <div class="step-content">School: 
-															 <span class="sum-school"></span>
-														 </div>    
+													<div class="step-title"> Summary</div>   
 														 <div class="step-content">Department: 
 															 <span class="sum-dpt"></span>
 														 </div>                
 														 <div class="step-content">Class: 
-															 <span class"sum-class"></span>
+															 <span class="sum-class"></span>
 														 </div>                        
 														 <div class="step-content">Book Name: 
-																<span class"sum-book"></span>
+																<span class="sum-book"></span>
 														 </div>       
 														 <div class="step-content">Book Author: 
 																<span class="sum-author"></span>
@@ -184,7 +181,7 @@
 											</div>
 											<div class = "span2">
 												<div class = "next">
-													<button class="btn btn-large btn-success" type="submit">Confirm</button>
+													<button class="btn btn-large btn-success" type="submit" >Confirm</button>
 												</div>
 											</div>
 										</div>

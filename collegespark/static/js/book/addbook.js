@@ -18,6 +18,7 @@ $(document).ready(function () {
         });
 });
 
+
 $("#id_image").change(function () {
    var input = document.getElementById("id_image");
       if (input.files && input.files[0]) {
@@ -105,5 +106,19 @@ $('#addbook-form').validate({
             }
             $('#myWizard').wizard('next');
         }
+        else if (step == 3) {
+            var url = window.location.pathname;
+            $.post(url, $(form).serialize(), function(data){
+                if (data['errors']) {
+                    alert(data['errors']);
+                }
+                else if (data['redirect_url']) {
+                  var redirect_link = data['redirect_url'];
+                  redirect_link = redirect_link + $(form).serialize();
+                  alert("You book has been added!");
+                  window.location = redirect_link;
+                }
+            });
+      }
     }
 });
