@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url
 
-urlpatterns = patterns('collegespark.core.views',
+urlpatterns = patterns(
+    'collegespark.core.views',
     url(r'^$', 'index_view', name='index'),
     url(r'^logout$', 'logout_view', name='logout'),
     url(r'^login/validation$', 'login_validation'),
