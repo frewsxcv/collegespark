@@ -5,6 +5,7 @@ of that department. At the end each Topic has post.
 '''
 from django.db import models
 from collegespark.core.models import User, School
+import datetime
 
 
 class Forum(models.Model):
@@ -20,7 +21,7 @@ class Category(models.Model):
     forum       = models.ForeignKey(Forum)
     name        = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, default='')
-    created     = models.DateTimeField(auto_now_add=True)
+    created     = models.DateTimeField(default=datetime.datetime.now())
     updated     = models.DateTimeField(null=True)
     created_by  = models.ForeignKey(User)
     views       = models.IntegerField(blank=True, default=0)
@@ -39,7 +40,7 @@ class Category(models.Model):
 class Topic(models.Model):
     category    = models.ForeignKey(Category)
     name        = models.CharField(max_length=255)
-    created     = models.DateTimeField(auto_now_add=True)
+    created     = models.DateTimeField(default=datetime.datetime.now())
     updated     = models.DateTimeField(null=True)
     created_by  = models.ForeignKey(User)
     views       = models.IntegerField(blank=True, default=0)
@@ -58,9 +59,9 @@ class Topic(models.Model):
 class Post(models.Model):
     topic      = models.ForeignKey(Topic)
     created_by = models.ForeignKey(User)
-    created    = models.DateTimeField(auto_now_add=True)
+    created    = models.DateTimeField(default=datetime.datetime.now())
     updated    = models.DateTimeField(blank=True, null=True)
     updated_by = models.ForeignKey(User, related_name='updated_by', blank=True, null=True)
-    body       = models.TextField()
-    body_html  = models.TextField()
+    post_topic = models.TextField()
+    post_body  = models.TextField()
     user_ip    = models.GenericIPAddressField(blank=True, null=True)

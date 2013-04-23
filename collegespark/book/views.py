@@ -3,34 +3,58 @@ from django.template     import RequestContext
 from django.http         import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, logout, authenticate
 from forms               import BookInfoForm
-from django.contrib.auth.models import User
+import json
+from django.contrib.auth.decorators import login_required
 
 
 def book_view(request, school_name):
-    print "book view"
-    return render_to_response(
-        'book/book.html', context_instance=RequestContext(request))
+    print "here"
+    ctx = "book view"
+    return render_to_response('book/book.html', ctx,
+                              context_instance=RequestContext(request))
 
-#@login_required
+
+@login_required(login_url='/')
 def add_book_view(request, school_name):
-    print "-------test -----"
-    if request.user.is_authenticated():
-        bookInfo_form = BookInfoForm()
+    print "add book view"
+    if request.method == 'POST':
+        print "post inside"
+        addbook_msg = {}
+        user = request.user
+        school = request.user.school
+        ip = request.META.get('REMOTE_ADDR', None)
+
+        book_form_kwargs = {"user": user, "school_name": school,
+                            "ip": ip}
+
+        BookForm = BookInfoForm(request.POST, request.FILES,
+                                **book_form_kwargs)
+
+        if BookForm.is_valid():
+            print BookForm.cleaned_data
+            BookForm.save()
+            print BookForm.book.id
+            url = "/" + school_name + "/book"
+            url = url + "/viewbook/" + str(request.user.id)
+            url = url + "/" + str(BookForm.book.id) + "/"
+            addbook_msg['redirect_url'] = url
+        else:
+            print "add book error"
+            addbook_msg['errors'] = BookForm.errors
+
+        jsonCtx = json.dumps(addbook_msg)
+        return HttpResponse(jsonCtx, mimetype='application/json')
+
     else:
-        print "out"
-        return HttpResponseRedirect('/')
+        bookInfo_form = BookInfoForm()
+        ctx = {'bookInfo_form': bookInfo_form}
+        return render_to_response('book/addBook.html', ctx,
+                                  context_instance=RequestContext(request))
 
-    ctx = {'bookInfo_form': bookInfo_form}
 
-    return render_to_response('book/addBook.html', ctx, context_instance=RequestContext(request))
+def single_book_view(request, school_name, user_id, book_id):
+    ctx = "single book view"
+    print "single book view"
+    return render_to_response('book/addbookresult.html', ctx,
+                              context_instance=RequestContext(request))
 
-'''
-def add_Book_toDB_view(request):
-    if request.user.is_authenticated():
-        if request.method == "POST":
-            form = BookInfoForm(request.POST, request.FILES)
-            if form.is_valid():
-                school_name = form.cleaned_data['school_name']
-                dpt_name = form.cleaned_data['dpt_name']
-                class_name = form.cleaned_data['class_name'] 
-'''

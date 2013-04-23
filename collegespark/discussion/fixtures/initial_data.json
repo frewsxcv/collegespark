@@ -1,0 +1,29 @@
+[
+  {
+    "model": "discussion.Forum",
+    "pk": 1,
+    "fields": {
+      "name": "Cal Poly Forum",
+      "school": 1
+    }
+  },
+  {
+    "model": "discussion.Category",
+    "pk": 1,
+    "fields": {
+      "forum": 1,
+      "name": "computer science",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "csc357",
+      "created_by": 1
+    }
+  }
+]

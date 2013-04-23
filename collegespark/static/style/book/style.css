@@ -12,61 +12,78 @@ label.error {
     margin-bottom: 5px;
 }
 
-#required-field {
+.star {
+	color: red;
+}
+
+.required-field {
 	font-weight: bold;
 	font-size: 15px;
 }
 
-.step-content {
+.content {
 	border: 1px solid lightgray;
 	background-color: whiteSmoke;
 }
 
-#step-title {
+.addBook-StepOne, .addBook-StepTwo, .addBook-StepThree {
+	margin-left: 10px;
+}
+
+.example {
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.step-title {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: bold;
     font-size: 30px;
     margin: 20px 0px 30px 0px;
 }
 
-#step-content {
+.step-content {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: bold;
     font-size: 20px;
     margin: 20px 0px 20px 0px;
 }
 
-#stepone-next {
+.sum-school, .sum-dpt, .sum-class, 
+.sum-book, .sum-author, .sum-ISBN, .sum-price, .sum-condition, .sum-description {
+	color: #7FB9EC;
+}
+
+.stepone-btn .next .btn {
 	width: 70%;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 0px 20px 20px;
 }
 
-#steptwo-next {
+.steptwo-btn .next .btn{
 	width: 70%;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 0px 20px 20px;
 }
 
-#steptwo-pre {
+.steptwo-btn .pre .btn{
 	width: 70%;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 0px 20px 20px;
 }
 
-#stepthree-confirm {
+.stepthree-btn .next .btn {
 	width: 70%;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 0px 20px 20px;
 }
 
-#stepthree-pre {
+.stepthree-btn .pre .btn {
 	width: 70%;
-	margin: 20px 0px 20px 0px;
+	margin: 20px 0px 20px 20px;
 }
 
-.summary-info {
-	font-weight: 100;
-	color:grey;
-	margin:0px 0px 0px 10px;
-}
-
-#id_description {
+.addBook-StepTwo .input-description {
 	width: 85%;
+}
+
+.addBook-StepThree .sum-description {
+	width: 50%;
+	height: 120px;
 }

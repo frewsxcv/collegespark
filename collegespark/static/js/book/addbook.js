@@ -1,9 +1,30 @@
+$(document).ready(function () {
+    $.validator.addMethod("checkDecimal",
+        function() {
+             var intRegex = /^\d+(\.\d{0,2})?$/;
+             var original = $('#id_price').val();
+             if (original < 0)
+             {
+                 return false;
+             }
+             if (!original.match(intRegex))
+             {
+                 return false;
+             }
+             else
+             {
+                 return true;
+             }
+        });
+});
+
+
 $("#id_image").change(function () {
    var input = document.getElementById("id_image");
       if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function (e) {
-            $('#sum-image')
+            $('.sum-image')
                   .attr('src', e.target.result)
                   .width(400)
                   .height(300);
@@ -12,11 +33,11 @@ $("#id_image").change(function () {
       }
 });
 
-$('#steptwo-pre').click(function() {
+$('.steptwo-btn .pre .btn').click(function() {
    $('#myWizard').wizard('previous');
 });
 
-$('#stepthree-pre').click(function() {
+$('.stepthree-btn .pre .btn').click(function() {
    $('#myWizard').wizard('previous');
 });
 
@@ -36,7 +57,8 @@ $('#addbook-form').validate({
         },
         price: {
             required: true,
-            number: true
+            number: true,
+            checkDecimal: true
         },
         description: {
             required: true
@@ -46,8 +68,12 @@ $('#addbook-form').validate({
         dpt_name: "department name is required",
         class_name: "class name is required",
         book_name: "book name is required",
-        price: "book price is required and must be number",
-        description: "book description is required"
+        description: "book description is required",
+        price: {
+            required: "book price is required",
+            number: "book price must be a number",
+            checkDecimal: "book price must be a non-negative number with only 2 decimal places"
+        }
     },
     highlight: function(element) {
         $(element).closest('.control-group').removeClass('success').addClass('error');
@@ -59,24 +85,40 @@ $('#addbook-form').validate({
     submitHandler: function(form) {
         var step = $('#myWizard').wizard('selectedItem').step;
         if (step == 1) {
-            $("#sum-dpt").text($('#id_dpt_name').val());
-            $("#sum-class").text($('#id_class_name').val());
+            $(".sum-dpt").text($('#id_dpt_name').val());
+            $(".sum-class").text($('#id_class_name').val());
             $('#myWizard').wizard('next');
         }
         else if (step == 2) {
-            $("#sum-book").text($('#id_book_name').val());
-            $("#sum-author").text($('#id_author').val());
-            $("#sum-ISBN").text($('#id_ISBN').val());
-            $("#sum-price").text($('#id_price').val());
-            $("#sum-description").text($('#id_description').val());
+            $(".sum-book").text($('#id_book_name').val());
+            $(".sum-author").text($('#id_author').val());
+            $(".sum-ISBN").text($('#id_ISBN').val());
+            var myPrice = parseFloat($('#id_price').val()).toFixed(2);
+            $('#id_price').val(myPrice);
+            $(".sum-price").text($('#id_price').val());
+            $(".sum-description").val($('#id_description').val());
 
             if ($('#id_condition').val() == 1) {
-                $("#sum-condition").text('New');
+                $(".sum-condition").text('New');
             }
             else {
-                $("#sum-condition").text('Used');
+                $(".sum-condition").text('Used');
             }
             $('#myWizard').wizard('next');
         }
+        else if (step == 3) {
+            var url = window.location.pathname;
+            $.post(url, $(form).serialize(), function(data){
+                if (data['errors']) {
+                    alert(data['errors']);
+                }
+                else if (data['redirect_url']) {
+                  var redirect_link = data['redirect_url'];
+                  redirect_link = redirect_link + $(form).serialize();
+                  alert("You book has been added!");
+                  window.location = redirect_link;
+                }
+            });
+      }
     }
 });
