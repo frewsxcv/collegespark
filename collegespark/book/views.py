@@ -30,10 +30,12 @@ def add_book_view(request, school_name):
         BookForm = BookInfoForm(request.POST, request.FILES,
                                 **book_form_kwargs)
 
+        #print BookForm.base_fields
+        print request.FILES
         if BookForm.is_valid():
-            print BookForm.cleaned_data
+            #print BookForm
             BookForm.save()
-            print BookForm.book.id
+            #print BookForm.book.id
             url = "/" + school_name + "/book"
             url = url + "/viewbook/" + str(request.user.id)
             url = url + "/" + str(BookForm.book.id) + "/"

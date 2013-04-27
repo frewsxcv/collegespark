@@ -18,7 +18,6 @@ $(document).ready(function () {
         });
 });
 
-
 $("#id_image").change(function () {
    var input = document.getElementById("id_image");
       if (input.files && input.files[0]) {
@@ -41,7 +40,7 @@ $('.stepthree-btn .pre .btn').click(function() {
    $('#myWizard').wizard('previous');
 });
 
-$('#addbook-form').validate({
+var signupForm = $('#addbook-form').validate({
     errorPlacement: function(error, element) {
         element.parent().prepend(error);
     },
@@ -81,44 +80,34 @@ $('#addbook-form').validate({
     success: function(element) {
         $(element).text('OK!').addClass('valid');
         $(element).closest('.control-group').removeClass('error').addClass('success');
-    },
-    submitHandler: function(form) {
-        var step = $('#myWizard').wizard('selectedItem').step;
-        if (step == 1) {
-            $(".sum-dpt").text($('#id_dpt_name').val());
-            $(".sum-class").text($('#id_class_name').val());
-            $('#myWizard').wizard('next');
-        }
-        else if (step == 2) {
-            $(".sum-book").text($('#id_book_name').val());
-            $(".sum-author").text($('#id_author').val());
-            $(".sum-ISBN").text($('#id_ISBN').val());
-            var myPrice = parseFloat($('#id_price').val()).toFixed(2);
-            $('#id_price').val(myPrice);
-            $(".sum-price").text($('#id_price').val());
-            $(".sum-description").val($('#id_description').val());
-
-            if ($('#id_condition').val() == 1) {
-                $(".sum-condition").text('New');
-            }
-            else {
-                $(".sum-condition").text('Used');
-            }
-            $('#myWizard').wizard('next');
-        }
-        else if (step == 3) {
-            var url = window.location.pathname;
-            $.post(url, $(form).serialize(), function(data){
-                if (data['errors']) {
-                    alert(data['errors']);
-                }
-                else if (data['redirect_url']) {
-                  var redirect_link = data['redirect_url'];
-                  redirect_link = redirect_link + $(form).serialize();
-                  alert("You book has been added!");
-                  window.location = redirect_link;
-                }
-            });
-      }
     }
 });
+
+$(".no-submit-one").click(function () {
+    if (signupForm.form()) {
+        $(".sum-dpt").text($('#id_dpt_name').val());
+        $(".sum-class").text($('#id_class_name').val());
+        $('#myWizard').wizard('next');
+    }
+});
+
+$(".no-submit-two").click(function () {
+    if (signupForm.form()) {
+        $(".sum-book").text($('#id_book_name').val());
+        $(".sum-author").text($('#id_author').val());
+        $(".sum-ISBN").text($('#id_ISBN').val());
+        var myPrice = parseFloat($('#id_price').val()).toFixed(2);
+        $('#id_price').val(myPrice);
+        $(".sum-price").text($('#id_price').val());
+        $(".sum-description").val($('#id_description').val());
+
+        if ($('#id_condition').val() == 1) {
+            $(".sum-condition").text('New');
+        }
+        else {
+            $(".sum-condition").text('Used');
+        }
+        $('#myWizard').wizard('next');
+    }
+});
+

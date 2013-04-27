@@ -5,7 +5,7 @@ import datetime
 
 class Book(models.Model):
     def url(self, filename):
-        route = "MultimediaData/Books/%s"%(str(filename))
+        route = "MultimediaData/Books/%s/%s"%(self.school_name.name, str(filename))
         return route
 
     seller = models.ForeignKey(User)
@@ -19,10 +19,10 @@ class Book(models.Model):
     book_name = models.CharField(max_length=40, blank=False)
     author = models.CharField(max_length=20, blank=True)
     ISBN = models.CharField(max_length=20, blank=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
     description = models.TextField(max_length=300, blank=False)
     condition = models.BooleanField(default=False, blank=False)
-    image = models.ImageField(upload_to='book', null=True, blank=True)
+    image = models.ImageField(upload_to=url, null=True, blank=True)
 
     def __unicode__(self):
         return self.book_name

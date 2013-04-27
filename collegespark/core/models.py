@@ -66,6 +66,9 @@ class School(models.Model):
     name       = models.CharField(max_length=40, unique=True, blank=False)
     short_name = models.CharField(max_length=20, unique=True, blank=False)
 
+    def __unicode__(self):
+        return ""
+
     def __repr__(self):
         return "<School '{}'>".format(self.name)
 

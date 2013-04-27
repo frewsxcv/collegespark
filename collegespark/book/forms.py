@@ -27,8 +27,7 @@ class BookInfoForm(forms.Form):
                'placeholder': 'Enter description of the book'}), required=True)
     condition = forms.ChoiceField(widget=forms.Select, choices=CHOICES,
                                   required=True)
-    image = forms.ImageField(widget=forms.FileInput(
-        attrs={'class': 'input-image'}), required=False)
+    image = forms.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         self.seller = kwargs.pop('user', None)
@@ -41,7 +40,6 @@ class BookInfoForm(forms.Form):
         return self.cleaned_data
 
     def save(self):
-
         dpt_name = self.cleaned_data['dpt_name']
         class_name = self.cleaned_data['class_name']
         book_name = self.cleaned_data['book_name']
@@ -52,11 +50,13 @@ class BookInfoForm(forms.Form):
         condition = self.cleaned_data['condition']
         image = self.cleaned_data['image']
 
+
+        print image
         if image:
             print "image"
         else:
             print "no image"
-
+        print self.errors
         self.book = Book(seller=self.seller, school_name=self.school_name,
                          isSold=False, views=0, dpt_name=dpt_name,
                          class_name=class_name, book_name=book_name,

@@ -9,6 +9,8 @@
 	<script src="http://fuelcdn.com/fuelux-imh/2.2/loader.min.js" type="text/javascript"></script>
 	<script src="http://alittlecode.com/files/jQuery-Validate-Demo/assets/js/jquery.validate.min.js"></script>
 	<script src="{{ STATIC_URL }}/js/book/addbook.js" type="text/javascript"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+
 {% endblock %}
 
 {% block css %}
@@ -35,7 +37,7 @@
 	 </div>
 
 
-	 <form method = "POST" id = "addbook-form">
+	 <form method = "POST" id = "addbook-form" enctype="multipart/form-data" >
 	 		{% csrf_token %}
 			<div class="step-content">
 
@@ -64,7 +66,7 @@
 										 <div class="span2 offset10">
 										 		<div class="stepone-btn">
 										 			<div class = "next">
-														<button class="btn btn-large btn-primary" type="submit">Next</button>
+														<button class="btn btn-large btn-primary no-submit-one" type="button">Next</button>
 													</div>
 												</div>
 										 </div>
@@ -123,7 +125,7 @@
 											</div>
 											<div class="span2">
 												<div class = "next">
-													<button class="btn btn-large btn-primary" type="submit">Next</button>
+													<button class="btn btn-large btn-primary no-submit-two" type="button">Next</button>
 												</div>
 											</div>
 										</div>
