@@ -14,7 +14,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, username, password):
         print School.objects.all()
         school = School.objects.filter(id=1)[0]
-        user   = self.create_user(
+        user = self.create_user(
             email, username=username, school=school, password=password)
         user.is_admin = True
         user.save(using=self._db)
@@ -22,16 +22,17 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email      = models.EmailField(unique=True, max_length=255, blank=False, db_index=True)
-    username   = models.CharField(max_length=30, blank=False, unique=True)
-    major      = models.ForeignKey('Major', blank=True, null=True)
+    email = models.EmailField(unique=True, max_length=255,
+                              blank=False, db_index=True)
+    username = models.CharField(max_length=30, blank=False, unique=True)
+    major = models.ForeignKey('Major', blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True)
-    last_name  = models.CharField(max_length=30, blank=True)
-    is_active  = models.BooleanField(default=True)
-    is_admin   = models.BooleanField(default=False)
-    school     = models.ForeignKey('School')
+    last_name = models.CharField(max_length=30, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    school = models.ForeignKey('School')
 
-    USERNAME_FIELD  = 'email'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     objects = UserManager()
@@ -63,7 +64,7 @@ class User(AbstractBaseUser):
 
 
 class School(models.Model):
-    name       = models.CharField(max_length=40, unique=True, blank=False)
+    name = models.CharField(max_length=40, unique=True, blank=False)
     short_name = models.CharField(max_length=20, unique=True, blank=False)
 
     def __unicode__(self):

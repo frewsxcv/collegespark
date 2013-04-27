@@ -5,8 +5,10 @@ from collegespark.core.models import User, School, Major
 class UserAdmin(admin.ModelAdmin):
     pass
 
+
 class SchoolAdmin(admin.ModelAdmin):
     pass
+
 
 class MajorAdmin(admin.ModelAdmin):
     pass
