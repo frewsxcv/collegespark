@@ -5,8 +5,10 @@ from django.contrib.auth import login, logout, authenticate
 from forms               import BookInfoForm
 import json
 from django.contrib.auth.decorators import login_required
+from collegespark.book.models import Book
 
 
+@login_required(login_url='/')
 def book_view(request, school_name):
     print "here"
     ctx = "book view"
@@ -52,10 +54,11 @@ def add_book_view(request, school_name):
         return render_to_response('book/addBook.html', ctx,
                                   context_instance=RequestContext(request))
 
-
+@login_required(login_url='/')
 def single_book_view(request, school_name, user_id, book_id):
-    ctx = "single book view"
+    ctx = {}
     print "single book view"
+    book = Book.objects.get(id=book_id, seller_id=user_id)
+    ctx['book'] = book
     return render_to_response('book/bookview.html', ctx,
                               context_instance=RequestContext(request))
-
