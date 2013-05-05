@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{%block title %} 
+	 Add Book Result Page
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/book/style.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="container">
+		<div class="content">
+			{% ifequal result "success" %}
+			<div class="row-fluid">
+				<div class="span7 offset5">
+					<div class="result-image">
+						<img src="/static/img/addbooksuccess.png">
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span8 offset4">
+					<div class="result-msg">
+						<div class="step-title">Your Book has been added !!</div>
+					</div>
+					<div class="result-url">
+						<a class="brand" href="{{ addbookURL }}">View the Book</a>
+					</div>
+				</div>
+			</div>
+			{% else %}
+				<div class="row-fluid">
+					<div class="span7 offset5">
+						<div class="result-image">
+							<img src="/static/img/addbookfail.png">
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span8 offset4">
+						<div class="result-msg">
+							<div class="step-title">Your Book can not be added</div>
+							<div class="error">{{result}}</div>
+						</div>
+						<div class="result-url">
+							<a class="brand" href="{{ addbookURL }}">Back too add book steps</a>
+						</div>
+					</div>
+				</div>
+			{% endifequal %}
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

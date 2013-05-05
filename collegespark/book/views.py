@@ -19,7 +19,7 @@ def add_book_view(request, school_name):
     print "add book view"
     if request.method == 'POST':
         print "post inside"
-        addbook_msg = {}
+        ctx = {}
         user = request.user
         school = request.user.school
         ip = request.META.get('REMOTE_ADDR', None)
@@ -30,22 +30,21 @@ def add_book_view(request, school_name):
         BookForm = BookInfoForm(request.POST, request.FILES,
                                 **book_form_kwargs)
 
-        #print BookForm.base_fields
         print request.FILES
         if BookForm.is_valid():
-            #print BookForm
             BookForm.save()
-            #print BookForm.book.id
             url = "/" + school_name + "/book"
             url = url + "/viewbook/" + str(request.user.id)
             url = url + "/" + str(BookForm.book.id) + "/"
-            addbook_msg['redirect_url'] = url
+            ctx['result'] = 'success'
+            ctx['addbookURL'] = url
         else:
             print "add book error"
-            addbook_msg['errors'] = BookForm.errors
+            ctx['result'] = BookForm.errors
+            ctx['addbookURL'] = '/' + school_name + "/book/addbook"
 
-        jsonCtx = json.dumps(addbook_msg)
-        return HttpResponse(jsonCtx, mimetype='application/json')
+        return render_to_response('book/addbookresult.html', ctx,
+                                  context_instance=RequestContext(request))
 
     else:
         bookInfo_form = BookInfoForm()
@@ -57,6 +56,6 @@ def add_book_view(request, school_name):
 def single_book_view(request, school_name, user_id, book_id):
     ctx = "single book view"
     print "single book view"
-    return render_to_response('book/addbookresult.html', ctx,
+    return render_to_response('book/bookview.html', ctx,
                               context_instance=RequestContext(request))
 

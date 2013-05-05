@@ -1,3 +1,4 @@
+/* add book steps page*/
 label.valid {
     width: 10%;
     background: url(/static/img/valid.png) center center no-repeat;
@@ -86,4 +87,34 @@ label.error {
 .addBook-StepThree .sum-description {
 	width: 50%;
 	height: 120px;
+}
+
+/* add book result page*/
+.result-image {
+	margin: 20px 0px 10px 20px;
+}
+
+.result-image img {
+	width: 50px;
+	height: 50px;
+}
+
+.result-msg {
+	margin: 10px 0px 10px 10px;
+}
+
+.result-msg .error {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: bold;
+    font-size: 20px;
+	color: red;
+	margin: 0px 0px 30px 0px;
+}
+
+.result-url {
+	margin: 0px 0px 20px 100px;
+}
+
+.result-url a {
+	font-size: 18px;
 }
