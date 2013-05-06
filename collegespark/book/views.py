@@ -6,6 +6,7 @@ from forms               import BookInfoForm
 import json
 from django.contrib.auth.decorators import login_required
 from collegespark.book.models import Book
+from models import User
 
 
 @login_required(login_url='/')
@@ -59,6 +60,9 @@ def single_book_view(request, school_name, user_id, book_id):
     ctx = {}
     print "single book view"
     book = Book.objects.get(id=book_id, seller_id=user_id)
+    user = User.objects.get(id=user_id)
     ctx['book'] = book
+    ctx['user'] = user
+    ctx['school'] = school_name
     return render_to_response('book/bookview.html', ctx,
                               context_instance=RequestContext(request))

@@ -118,3 +118,87 @@ label.error {
 .result-url a {
 	font-size: 18px;
 }
+
+/* book view page */
+.book-content {
+	border: 1px solid lightgray;
+	background-color: whiteSmoke;
+	margin: 5px 0px 0px 0px;
+	box-shadow: 2px 2px 1px lightgray;
+}
+
+.breadcrumb .state {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: bold;
+	font-size: 20px;
+}
+
+.breadcrumb .path {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: bold;
+	font-size:150%;
+}
+
+.bookImages {
+	margin: 5px 5px 5px 5px;
+	border: 2px solid lightgray;
+}
+
+.bookImages img {
+	width: 100%;
+	height: 200px;
+}
+
+.book-overview {
+	border-left: 3px solid lightgray;
+	padding: 0px 0px 0px 20px;
+}
+
+.book-title {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.book-view, .book-author {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-size: 15px;
+    margin: 0px 0px 0px 20px;
+}
+
+.title-view {
+    margin: 10px 0px 10px 0px;
+}
+
+.book-price, .upload-date, .book-seller, .book-condition{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-size: 20px;
+}
+
+.book-price .price, .book-price .ISBN, .upload-date .date, .book-seller .seller, .book-condition .condition{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.book-available-image, .book-sold-image{
+	margin: 0px 0px 0px 20px;
+	font-size: 15px;
+}
+
+.book-available-image img{
+	width: 30px;
+	height: 30px;
+}
+
+.book-sold-image img{
+	width: 30px;
+	height: 30px;
+}
+
+.book-view-description {
+	width: 95%;
+	margin: 5px 0px 10px 5px;
+}
+
+
