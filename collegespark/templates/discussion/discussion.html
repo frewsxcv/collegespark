@@ -149,17 +149,19 @@
             
             if (!isNaN(page)) {
                var page_num = parseInt(page, 10);
-               console.log(categories.page_count);
-               if (categories.is_valid_page()) {
-                  console.log("sdfsdfsd");
+
+               if (categories.is_valid_page(page_num) &&
+                  page_num !== categories.curr_page) {
                   categories.get_categories(page_num);
                   categories.curr_page = page_num;
-               } else {
+               
+               } else if (page_num !== categories.curr_page) {
                   categories.get_categories(categories.page_count)
                   categories.curr_page = categories.page_count;
                }
             
             } else {
+               console.log("-----------")
                if (page === "Prev" && categories.has_prev()) {
                   categories.curr_page -= 1;
                   categories.get_categories(categories.curr_page);
