@@ -56,6 +56,7 @@ class DiscussionForm(forms.Form):
             user_ip=self.ip)
 
         self.post.save()
+        self.topic.post_count += 1
 
     def clean(self):
         return self.cleaned_data
@@ -81,3 +82,4 @@ class DiscussionForm(forms.Form):
             created_by=self.user)
 
         self.topic.save()
+        self.category.topic_count += 1

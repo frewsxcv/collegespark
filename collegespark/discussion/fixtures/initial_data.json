@@ -7,6 +7,8 @@
       "school": 1
     }
   },
+
+
   {
     "model": "discussion.Category",
     "pk": 1,
@@ -18,12 +20,204 @@
   },
 
   {
+    "model": "discussion.Category",
+    "pk": 2,
+    "fields": {
+      "forum": 1,
+      "name": "electrical engineering",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Category",
+    "pk": 3,
+    "fields": {
+      "forum": 1,
+      "name": "political science",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Category",
+    "pk": 4,
+    "fields": {
+      "forum": 1,
+      "name": "history",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Category",
+    "pk": 5,
+    "fields": {
+      "forum": 1,
+      "name": "math",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Category",
+    "pk": 6,
+    "fields": {
+      "forum": 1,
+      "name": "mechanical engineering",
+      "created_by": 1
+    }
+  },
+
+
+
+
+  {
     "model": "discussion.Topic",
     "pk": 1,
     "fields": {
       "category": 1,
       "name": "csc357",
       "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "csc405",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "name": "cpe308",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "name": "cpe309",
+      "created_by": 1
+    }
+  },
+
+
+
+  {
+    "model": "discussion.Topic",
+    "pk": 5,
+    "fields": {
+      "category": 2,
+      "name": "ee357",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "name": "ee405",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 7,
+    "fields": {
+      "category": 2,
+      "name": "ee308",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 8,
+    "fields": {
+      "category": 2,
+      "name": "ee309",
+      "created_by": 1
+    }
+  },
+
+
+
+  {
+    "model": "discussion.Topic",
+    "pk": 9,
+    "fields": {
+      "category": 3,
+      "name": "ps357",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 10,
+    "fields": {
+      "category": 3,
+      "name": "ps405",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 11,
+    "fields": {
+      "category": 3,
+      "name": "ps308",
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "discussion.Topic",
+    "pk": 12,
+    "fields": {
+      "category": 3,
+      "name": "ps309",
+      "created_by": 1
+    }
+  },
+
+
+
+
+  {
+    "model": "discussion.Post",
+    "pk": 2,
+    "fields": {
+      "topic": 1,
+      "created_by": 1,
+      "post_topic": "What should I do",
+      "post_body": "I have problem with this"
+    }
+  },
+
+  {
+    "model": "discussion.Post",
+    "pk": 3,
+    "fields": {
+      "topic": 1,
+      "created_by": 1,
+      "post_topic": "I can not compile",
+      "post_body": "Can some one help me"
     }
   }
 ]
