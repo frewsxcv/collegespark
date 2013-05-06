@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+import datetime
 
 
 class UserManager(BaseUserManager):
@@ -76,3 +77,21 @@ class School(models.Model):
 
 class Major(models.Model):
     name = models.CharField(max_length=40)
+
+
+class Department(models.Model):
+    school = models.ForeignKey(School)
+    name = models.CharField(max_length=50)
+    short_name = models.CharField(max_length=20)
+    created_by = models.ForeignKey(User)
+    created = models.DateTimeField(default=datetime.datetime.now())
+    unique_together = ("school", "name")
+    unique_together = ("school", "short_name")
+
+
+class Class(models.Model):
+    department = models.ForeignKey(Department)
+    name = models.CharField(max_length=30)
+    created_by = models.ForeignKey(User)
+    created = models.DateTimeField(default=datetime.datetime.now())
+    unique_together = ("department", "name")
