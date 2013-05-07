@@ -37,8 +37,8 @@ def add_book_view(request, school_name):
         if BookForm.is_valid():
             BookForm.save()
             url = "/" + school_name + "/book"
-            url = url + "/viewbook/" + str(request.user.id)
-            url = url + "/" + str(BookForm.book.id) + "/"
+            url = url + "/viewbook/"
+            url = url + str(BookForm.book.id) + "/"
             ctx['result'] = 'success'
             ctx['addbookURL'] = url
         else:
@@ -56,13 +56,11 @@ def add_book_view(request, school_name):
                                   context_instance=RequestContext(request))
 
 @login_required(login_url='/')
-def single_book_view(request, school_name, user_id, book_id):
+def single_book_view(request, school_name, book_id):
     ctx = {}
     print "single book view"
-    book = Book.objects.get(id=book_id, seller_id=user_id)
-    user = User.objects.get(id=user_id)
+    book = Book.objects.get(id=book_id)
     ctx['book'] = book
-    ctx['user'] = user
     ctx['school'] = school_name
     return render_to_response('book/bookview.html', ctx,
                               context_instance=RequestContext(request))
