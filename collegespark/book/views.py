@@ -37,7 +37,7 @@ def add_book_view(request, school_name):
         if BookForm.is_valid():
             BookForm.save()
             url = "/" + school_name + "/book"
-            url = url + "/viewbook/"
+            url = url + "/"
             url = url + str(BookForm.book.id) + "/"
             ctx['result'] = 'success'
             ctx['addbookURL'] = url

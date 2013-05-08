@@ -1,5 +1,5 @@
 from django.db import models
-from collegespark.core.models import School, User
+from collegespark.core.models import School, User, Department, Class
 import datetime
 
 

@@ -50,8 +50,6 @@ class BookInfoForm(forms.Form):
         condition = self.cleaned_data['condition']
         image = self.cleaned_data['image']
 
-
-        print image
         if image:
             print "image"
         else:

@@ -175,7 +175,7 @@ label.error {
     font-size: 20px;
 }
 
-.book-price .price, .book-price .ISBN, .upload-date .date, .book-seller .seller, .book-condition .condition{
+.book-price .price, .book-price .ISBN, .upload-date .date, .book-seller .seller, .book-condition .condition, .share{
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-size: 20px;
     font-weight: bold;
@@ -201,4 +201,15 @@ label.error {
 	margin: 5px 0px 10px 5px;
 }
 
+.myShare {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 0px 0px 10px;
+}
 
+.sharrre {
+    margin: 5px 0px 5px 5px;
+    float:left;
+    width:25%;
+}
