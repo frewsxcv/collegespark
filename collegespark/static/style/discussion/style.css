@@ -16,11 +16,7 @@
     
 }
 
-.discussion-bar .input-append input {
-
-}
-
-.category-table {
+.table_header {
     position: relative;
     padding: 65px 19px 14px;
     background-color: #fff;
@@ -31,7 +27,7 @@
     margin-bottom: 15px;
 }
 
-.category-table::after
+.table_header::after
 {
     content: "Most Recent Discussion";
     position: absolute;
@@ -45,12 +41,8 @@
     color: #5a9ecc;
 }
 
-.category-table .pager .previous {
-    float: left;
-}
-
-.category-table .pager .next {
-    float: right;
+.table_header .view-all {
+    margin: 20px 0;
 }
 
 .recommended-you {
@@ -66,8 +58,6 @@
 
 
 /********************************/
-
-
 
 
 .discussion-form {
@@ -112,4 +102,10 @@
 
 .discussion-form .form-horizontal .controls {
     margin-left: 155px;
+}
+
+/*****************************************/
+
+.category-table .department-list{
+    border-bottom: 4px solid lightblue;
 }
