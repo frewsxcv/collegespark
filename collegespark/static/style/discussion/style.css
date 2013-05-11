@@ -1,29 +1,32 @@
+.search-bar {
+    margin: 10px 0;
+}
+
 .discussion-bar {
-    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
-.discussion-bar [class*="span"] {
-    margin-bottom: 10px;
-}
-
-.discussion-bar .new-post .btn {
+.create-post .btn {
     width: 100%;
     color: white;
 }
 
-.discussion-bar .input-append {
-    float: right;
-    
+.discussion-bar .breadcrumb {
+    margin-bottom: 0;
+    background: white;
+    border-radius: 0;
 }
+
 
 .table_header {
     position: relative;
-    padding: 65px 19px 14px;
+    padding: 55px 19px 14px;
     background-color: #fff;
+    /*
     border: 1px solid #ddd;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    border-radius: 4px;
+    */
     margin-bottom: 15px;
 }
 
@@ -41,7 +44,7 @@
     color: #5a9ecc;
 }
 
-.table_header .view-all {
+.table_header .view-all, .table_header .create-post {
     margin: 20px 0;
 }
 
@@ -108,4 +111,8 @@
 
 .category-table .department-list{
     border-bottom: 4px solid lightblue;
+}
+
+.table_header .category-search {
+    margin-bottom: 10px;
 }

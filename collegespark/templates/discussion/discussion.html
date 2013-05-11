@@ -9,32 +9,46 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid discussion-bar">
-   <div class="span3 new-post">
-      <button class="btn btn-success">Create a New Post</button>
+
+<div class="search-bar">
+   <div class="row-fluid">
+      <div class="span3 create-post">
+         <button class="btn btn-success">Create a New Post</button>
+      </div>
+
+      <div class="span9 discussion-search">
+         <div class="input-append pull-right">
+            <input class="input-xlarge" id="appendedInputButtons" type="text">
+
+            <div class="btn-group">
+               <button class="btn" tabindex="-1">Search</button>
+
+               <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                  Options
+                  <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu">
+                  <li><a href="#">Department</a></li>
+                  <li><a href="#">Class</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+               </ul>
+            </div>
+         </div>  
+      </div>
    </div>
+</div>
 
-   <div class="span9 discussion-search">
-      <div class="input-append">
-         <input class="input-xlarge" id="appendedInputButtons" type="text">
-
-         <div class="btn-group">
-            <button class="btn" tabindex="-1">Search</button>
-
-            <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
-               Options
-               <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-               <li><a href="#">Department</a></li>
-               <li><a href="#">Class</a></li>
-               <li class="divider"></li>
-               <li><a href="#">Separated link</a></li>
-            </ul>
-         </div>
-      </div>  
+<div class="discussion-bar">
+   <div class="row-fluid">      
+      <div class="span12">
+         <ul class="breadcrumb">
+            <li><a href="#">Home</a> <span class="divider">/</span></li>
+            <li><a href="#">Library</a> <span class="divider">/</span></li>
+            <li class="active">Data</li>
+         </ul>
+      </div>
    </div>
-
 </div>
 
 <div class="row-fluid">
@@ -57,7 +71,7 @@
 
       <div class="row-fluid">
          <div class="span4 view-all">
-            <a href="departments">
+            <a href="{% url 'category' user.school.short_name %}">
                <button class="btn span6">View All</button></a>
          </div>
 
@@ -74,45 +88,6 @@
    </div>
 </div>
 
-<div class="row-fluid">
-   <div class="span12 discussion-table">
-      <table class="table table-hover">
-         <thead>
-            <tr>
-               <th>#</th>
-               <th>First Name</th>
-               <th>Last Name</th>
-               <th>Username</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr>
-               <td>1</td>
-               <td>Mark</td>
-               <td>Otto</td>
-               <td>@mdo</td>
-            </tr>
-            <tr>
-               <td>2</td>
-               <td>Jacob</td>
-               <td>Thornton</td>
-               <td>@fat</td>
-            </tr>
-            <tr>
-               <td>3</td>
-               <td colspan="2">Larry the Bird</td>
-               <td>@twitter</td>
-            </tr>
-         </tbody>
-      </table>
-
-      <ul class="pager">
-         <button class="btn previous disabled">&larr; Newer</button>
-         <button class="btn next"> Older &rarr;</button>
-      </ul>
-
-   </div>
-</div>
 
 {% endblock %}
 

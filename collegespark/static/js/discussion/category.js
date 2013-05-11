@@ -8,7 +8,7 @@ Category.prototype.get_categories = function(page_num) {
     console.log(page_num);
     var url = window.location.pathname;
     var that = this;
-    url += "category?page=" + page_num + "&per_page=" + this.per_page;
+    url += "/category?page=" + page_num + "&per_page=" + this.per_page;
     $.get(url,  function(data){
         console.log(data);
         that.update_table(data);
