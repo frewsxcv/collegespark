@@ -54,17 +54,14 @@
 <div class="row-fluid">
    <div class="span12 table_header">
       <table class="table table-hover category-table">
-         <thead class="category-list">
-            <tr>
+         <thead>
+            <tr class="category-header">
                <th>#</th>
                <th>First Name</th>
                <th>Last Name</th>
             </tr>
          </thead>
-         
-         <tbody>
-            <tr>
-            </tr>
+         <tbody class="category-list">
          </tbody>
 
       </table>
@@ -97,21 +94,22 @@
 
 <script type="text/javascript">
    $(function () {
-      var categories_count = {{categories_count}}
-      var categories = new Category(categories_count);
+      var category_count = {{category_count}}
+      var category = new Category(category_count);
+      var extra_context = {};
 
-      if (categories_count !== 0) {
-         categories.get_categories(1);
-         categories.set_category_pagination();
+      if (category_count !== 0) {
+         category.get_page_data(
+            "category", 1, extra_context,category.update_table);
+         category.set_category_pagination();
       } else {
-         console.log("no categories")
+         console.log("no category")
       }
 
       $(".category-pagination li").click(function(){
-         var page = $(this).text().trim();
-         console.log("Page is " + page);
-         categories.get_page(page);
+         change_page(category, $(this));
       });
+
    });
 </script>
 {% endblock %}

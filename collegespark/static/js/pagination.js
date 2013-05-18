@@ -33,3 +33,56 @@ Pagination.prototype.set_page_count = function() {
 
     return count;
 };
+
+Pagination.prototype.get_pagination_num_html = function() {
+    var pagination = "";
+    console.log(this.page_count);
+    pagination += "<ul>\n<li><a>Prev</a></li>\n";
+
+    for (var i = 1; i <= this.page_count; ++i) {
+        pagination += "\t<li><a>" + i + "</a></li>\n";
+    }
+    pagination += "\t<li><a>Next</a></li>\n</ul>\n";
+
+    return pagination;
+};
+
+Pagination.prototype.get_next_page = function(page) {
+    if (!isNaN(page)) {
+       var page_num = parseInt(page, 10);
+
+       if (this.is_valid_page(page_num) &&
+          page_num !== this.curr_page) {
+          this.curr_page = page_num;
+
+       } else if (page_num !== this.curr_page) {
+          this.curr_page = this.page_count;
+       }
+
+    } else {
+       console.log("-----------");
+       if (page === "Prev" && this.has_prev()) {
+          this.curr_page -= 1;
+       } else if (page === "Next" && this.has_next()) {
+          this.curr_page += 1;
+       }
+    }
+
+    return this.curr_page;
+};
+
+Pagination.prototype.get_page_data = function(page_name, page_num, extra_context, callback) {
+    console.log(page_num);
+    var url = window.location.pathname;
+
+    console.log(extra_context);
+    url += "/paginator/" + page_name + "?page=" + page_num + "&per_page=" + this.per_page;
+    for (var key in extra_context)
+        if (extra_context.hasOwnProperty(key))
+            url += "&" + key + "=" + extra_context[key];
+
+    $.get(url,  function(data){
+        console.log(data);
+        callback(data);
+    });
+};

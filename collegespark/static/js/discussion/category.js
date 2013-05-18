@@ -1,77 +1,58 @@
-var Category = function(categories_count, per_page) {
-    Pagination.call(this, categories_count, per_page);
+var Category = function(category_count, per_page) {
+    Pagination.call(this, category_count, per_page);
 };
 
 Category.prototype = Object.create(Pagination.prototype);
 
-Category.prototype.get_categories = function(page_num) {
-    console.log(page_num);
-    var url = window.location.pathname;
-    var that = this;
-    url += "/category?page=" + page_num + "&per_page=" + this.per_page;
-    $.get(url,  function(data){
-        console.log(data);
-        that.update_table(data);
-    });
-};
-
 Category.prototype.update_table = function(data) {
     console.log("*************");
-    var rows = "<tbody>";
+    var rows = "<tbody class='category-list'>";
     var count = 0;
 
     for (var key in data) {
         var fields = data[key].fields;
         var name = fields.name;
         var topic_count = fields.topic_count;
-
-        rows += "<tr>\n" +
+        rows += "<tr class='category-row'>\n" +
                 "\t<td>" + 0 + "</td>\n" +
-                "\t<td>" + name + "</td>\n" +
+                "\t<td class='category-name'>" + name + "</td>\n" +
                 "\t<td>" + topic_count + "</td>\n" +
                 "</tr>\n";
         ++count;
     }
+
     rows += "</tbody>";
 
     $(".category-table > tbody").replaceWith(rows);
+
+    $(".category-list > tr").click(function() {
+       redirect_to_topic($(this));
+    });
 };
 
 Category.prototype.set_category_pagination = function() {
-    var pagination = "";
-    console.log(this.page_count);
-    pagination += "<ul>\n<li><a>Prev</a></li>\n";
-
-    for (var i = 1; i <= this.page_count; ++i) {
-        pagination += "\t<li><a>" + i + "</a></li>\n";
-    }
-    pagination += "\t<li><a>Next</a></li>\n</ul>\n";
+    pagination = this.get_pagination_num_html();
 
     $(".category-pagination ul").replaceWith(pagination);
 };
 
-Category.prototype.get_page = function(page) {
-    if (!isNaN(page)) {
-       var page_num = parseInt(page, 10);
+function change_page(obj, $this) {
+    var page = $this.text().trim();
+    var next_page;
+    var extra_context = {};
 
-       if (this.is_valid_page(page_num) &&
-          page_num !== this.curr_page) {
-          this.get_categories(page_num);
-          this.curr_page = page_num;
+    console.log("Page is " + page);
+    next_page = obj.get_next_page(page);
+    obj.get_page_data("category", next_page, extra_context, obj.update_table);
+}
 
-       } else if (page_num !== this.curr_page) {
-          this.get_categories(this.page_count);
-          this.curr_page = this.page_count;
-       }
+function redirect_to_topic($this) {
+    var category_name = $this.find(".category-name").text().trim();
+    var school_name = get_school_name();
+    var url = "";
 
-    } else {
-       console.log("-----------");
-       if (page === "Prev" && this.has_prev()) {
-          this.curr_page -= 1;
-          this.get_categories(this.curr_page);
-       } else if (page === "Next" && this.has_next()) {
-          this.curr_page += 1;
-          this.get_categories(this.curr_page);
-       }
-    }
-};
+    category_name = category_name.replace(/\s+/g, '-');
+
+    url += "/" + school_name + "/discussion/" + category_name;
+    window.location = url;
+}
