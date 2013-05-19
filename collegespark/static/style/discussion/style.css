@@ -116,3 +116,90 @@
 .table_header .category-search {
     margin-bottom: 10px;
 }
+
+/*************************************/
+
+.post-question .content{
+    background-color: #5161bc;
+}
+
+.post-question .question {
+    margin: 20px 10px 25px 15px;
+    font-weight: bold;
+    font-size:  26px;
+    color: #FFF;
+}
+
+.post {
+    margin-top: 5px;
+}
+.post .post-profile{
+    background-color: #FFF;
+    padding-left: 4%;
+    height: inherit;
+}
+
+.post-profile dd {
+    margin-left: 28%;
+}
+
+.post .profile-image {
+    margin-top: -30px;
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 4%; 
+}
+
+.post .post-body, .reply-body {
+    padding:  5px 10px 10px 15px;
+    background-color: #FFF;
+}
+
+.post-body .post-title {
+   padding: 0;
+   margin: 0;
+   font-size: 12px;
+   font-weight: normal;
+   color: #555;
+}
+
+.post-body .author {
+    padding: 0 0 12px;
+    margin: 0 0 26px;
+    text-transform: none;
+    border-bottom: 1px solid #eee;
+    font-size: 10px;
+    color: #999;
+}
+
+.post-body .content {
+    min-height: 3em;
+    overflow: hidden;
+}
+
+/*****************************/
+
+.reply {
+    margin-top: 10px;
+}
+
+
+.related-info {
+    background-color: #FFF;
+}
+
+
+.reply-body .profile-image {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 20px;
+}
+
+hr {
+    background-color: #bfbfbf;
+    border: 0;
+    height: 2px;
+    margin:20px 15px 25px 15px;
+}

@@ -8,13 +8,15 @@ Post.prototype.update_table = function(data) {
     console.log("*************");
     var rows = "<tbody class='table-list'>";
     var count = 0;
+    var school_name = get_school_name();
 
     console.log(data);
     for (var key in data) {
         var fields = data[key].fields;
         var name = fields.post_topic;
         var post_count = fields.post_count;
-        rows += "<tr class='table-row'>\n" +
+        rows += "<tr class='table-row' " +
+                "data-href='/" + school_name + "/discussion/" + data[key].pk + "' >" +
                 "\t<td>" + 0 + "</td>\n" +
                 "\t<td class='post-name'>" + name + "</td>\n" +
                 "\t<td>" + post_count + "</td>\n" +
@@ -48,7 +50,7 @@ function change_page(obj, extra_context, $this) {
 
 function redirect_to_post($this) {
     var post_name = $this.find(".post-name").text().trim();
-    var url = window.location.pathname;
+    var url = $this.data("href");
 
     post_name = post_name.replace(/\s+/g, '-');
     url += "/" + post_name;

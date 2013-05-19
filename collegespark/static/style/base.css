@@ -1,5 +1,30 @@
+@media (min-width: 1200px) {
+.row-fluid .span12 {
+  width: 97.905983%;
+}
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+.row-fluid .span12 {
+width: 98.0%;
+}
+}
+
 #content {
     margin-top: 2px;
+}
+
+#content [class*="span"] {
+    margin-left: 5px;
+}
+
+
+#welcome-bar [class*="span"] {
+    margin-left: 5px;
+}
+
+#top-navbar [class*="span"] {
+    margin-left: 5px;
 }
 
 /******* welcome bar **************/

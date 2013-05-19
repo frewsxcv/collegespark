@@ -58,6 +58,13 @@ def post_view(request, school_name, department, post_class):
         'discussion/post.html', ctx, context_instance=RequestContext(request))
 
 
+def post_body_view(request, school_name, post_id, post_question):
+    
+    return render_to_response(
+        'discussion/post-body.html', context_instance=RequestContext(request))
+
+
+
 def discussion_form_view(request, school_name):
     form_msg = {}
 
