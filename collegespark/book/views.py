@@ -25,6 +25,8 @@ def add_book_view(request, school_name):
         ctx = {}
         user = request.user
         school = request.user.school
+        print "the school is " + str(school)
+        print request.user.school
         ip = request.META.get('REMOTE_ADDR', None)
 
         book_form_kwargs = {"user": user, "school_name": school,
@@ -62,5 +64,8 @@ def single_book_view(request, school_name, book_id):
     book = Book.objects.get(id=book_id)
     ctx['book'] = book
     ctx['school'] = school_name
+    relatedBooks = Book.objects.filter(school_name=book.school_name, dpt_name=book.dpt_name)
+    relatedBooks = relatedBooks.exclude(id=book_id)
+    ctx['relatedBooksURL'] = relatedBooks
     return render_to_response('book/bookview.html', ctx,
                               context_instance=RequestContext(request))

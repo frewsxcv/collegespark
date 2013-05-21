@@ -213,3 +213,18 @@ label.error {
     float:left;
     width:25%;
 }
+
+.carousel-inner {
+	margin-top: 10px;
+}
+
+.caption {
+	background-color:grey;
+}
+
+.related-book-title {
+	color: white;
+}
+
+
+ 

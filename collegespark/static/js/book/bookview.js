@@ -1,4 +1,6 @@
-var currentURL = window.location.pathname;
+var currentURL = "http://sharrre.com/";
+console.log(currentURL);
+
 
 $('.twitter').sharrre({
   share: {
@@ -19,7 +21,7 @@ $('.facebook').sharrre({
     facebook: true
   },
   url: currentURL,
-  enableHover: true,
+  enableHover: false,
   enableTracking: true,
   enableCounter: false,
   click: function(api, options){
@@ -33,7 +35,7 @@ $('.googleplus').sharrre({
     googlePlus: true
   },
   url: currentURL,
-  enableHover: true,
+  enableHover: false,
   enableTracking: true,
   enableCounter: false,
   click: function(api, options){
