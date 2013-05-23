@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{%block title %} 
+   Welcome to Home page 
+{% endblock %}
+
+{% block css %}
+   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/discussion/style.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="discussion-bar">
+   <div class="row-fluid">      
+      <div class="span12">
+         <ul class="breadcrumb">
+            <li><a href="#">Home</a> <span class="divider">/</span></li>
+            <li><a href="#">Library</a> <span class="divider">/</span></li>
+            <li class="active">Data</li>
+         </ul>
+      </div>
+   </div>
+</div>
+
+
+<div class="row-fluid post-question">
+   
+   <div class="span12 content">
+      <div class="question">How do I change the Fest logo and keep the same textures</div>
+   </div> 
+</div>
+
+<div class="row-fluid post">
+   <div class="span2 post-profile">
+      <dl>
+        <dt><img class="profile-image" src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif"></dt>
+        <dd>sdfdsf</dd>
+        <dd>hjjc</dd>
+        <dd>dsfdf</dd>
+      </dl>
+   </div>
+
+   <div class="span10 post-body">
+      <div class="post-title">
+         <a href="#">Re: How do I change the Fest logo and keep the same textures</a>
+         </div>
+         <p class="author">
+            by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
+         » Wed Mar 27, 2013 5:38 pm
+      </p>
+         
+         <div class="content">
+            Hi<br><br>I'm not sure if I understand. Isn't a texture a different layer already? I think it should not change if You will only replace the text. Can You please show me a result after the modification ?
+         </div>                      
+ 
+   </div>
+</div>
+
+
+<div class="row-fluid reply">
+   <div class="span2 related-info">
+
+   </div>
+
+   <div class="span10 reply-body">
+
+      <div class="row-fluid">
+         <div class="span12 post-body">
+            <div class="profile-image">
+               <img src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif">
+            </div>
+            <div class="post-title"> 
+               <a href="#">Re: How do I change the Fest logo and keep the same textures</a>
+            </div>
+            <p class="author">
+               by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
+               » Wed Mar 27, 2013 5:38 pm
+            </p>
+               
+            <div class="content">
+               Hi<br><br>I'm not sure if I understand. Isn't a texture a different layer already? I think it should not change if You will only replace the text. Can You please show me a result after the modification ?
+            </div>
+         </div>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid">
+         <div class="span12 post-body">
+            <div class="profile-image">
+               <img src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif">
+            </div>
+            <div class="post-title"> 
+               <a href="#">Re: How do I change the Fest logo and keep the same textures</a>
+            </div>
+            <p class="author">
+               by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
+               » Wed Mar 27, 2013 5:38 pm
+            </p>
+               
+            <div class="content">
+               Hi<br><br>I'm not sure if I understand. Isn't a texture a different layer already? I think it should not change if You will only replace the text. Can You please show me a result after the modification ?
+            </div>
+         </div>
+      </div>
+
+              
+   </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{STATIC_URL}}/js/pagination.js"></script>
+<script src="{{STATIC_URL}}/js/discussion/post.js"></script>
+
+<script type="text/javascript">
+   $(function () {
+      
+
+   });
+</script>
+
+
+{% endblock %}

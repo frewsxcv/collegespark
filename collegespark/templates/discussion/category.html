@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{%block title %} 
+   Welcome to Home page 
+{% endblock %}
+
+{% block css %}
+   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/discussion/style.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="discussion-bar">
+   <div class="row-fluid">      
+      <div class="span12">
+         <ul class="breadcrumb">
+            <li><a href="#">Home</a> <span class="divider">/</span></li>
+            <li><a href="#">Library</a> <span class="divider">/</span></li>
+            <li class="active">Data</li>
+         </ul>
+      </div>
+   </div>
+</div>
+
+
+
+<div class="row-fluid">
+   <div class="span12 table_header">
+
+      <div class="row-fluid category-search">
+         <div class="span12">
+            <form>
+               <div class="input-append pull-right">
+                  <input class="input-xlarge" id="appendedInputButtons" type="text">
+
+                  <div class="btn-group">
+                     <button class="btn" tabindex="-1">Search</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+            <table class="table table-hover category-table">
+               <thead  class="category-list">
+                  <tr>
+                     <th>#</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                  </tr>
+               </thead>
+               
+               <tbody>
+                  <tr>
+                  </tr>
+               </tbody>
+
+            </table>
+
+            <div class="row-fluid">
+               <div class="span4  create-post">
+                  <a href="departments">
+                     <button class="btn btn-success">Create a New Post</button>
+                  </a>
+               </div>
+
+               <div class="span8">
+                  <div class="pagination category-pagination  pull-right">
+                     <ul>
+                        <li><a></a></li>
+                     </ul>
+                  </div>
+               </div>
+
+            </div>
+
+   
+
+   </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{STATIC_URL}}/js/pagination.js"></script>
+<script src="{{STATIC_URL}}/js/discussion/category.js"></script>
+
+<script type="text/javascript">
+   $(function () {
+      var category_count = {{category_count}}
+      var category = new Category(category_count, 40);
+      var extra_context = {};
+
+      if (category_count !== 0) {
+         category.get_page_data(
+            "category", 1, extra_context, category.update_table);
+         category.set_category_pagination();
+      } else {
+         console.log("no category")
+      }
+
+      $(".category-pagination li").click(function(){
+         change_page(category, $(this));
+      });
+
+   });
+</script>
+
+
+{% endblock %}

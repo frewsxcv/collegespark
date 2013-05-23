@@ -14,45 +14,6 @@ label.error {
 }
 
 
-/******* Home **************/
-#welcome-bar {
-    background-color: rgb(168, 184, 204);
-}
-
-#welcome-bar .welcome-text {
-    font-size: 20px;
-    font-weight: bold;
-    border-left: 1px solid  rgb(159, 170, 184);
-    border-right: 1px solid  rgb(159, 170, 184);
-}
-
-#welcome-bar .welcome-text > a, 
-#welcome-bar .nav-menu .menu > a {
-   color: rgb(238, 238, 238);
-   font-weight: bold;
-}
-
-#welcome-bar .welcome-text > a:hover, 
-#welcome-bar .nav-menu .menu > a:hover {
-   color: #5a9ecc;
-   border-radius: 0px;
-}
-
-#welcome-bar .nav-menu .menu {
-   float: right;
-   border-left: 1px solid  rgb(159, 170, 184);
-   width: 140px;
-}
-
-#welcome-bar .nav-menu .nav-pills {
-   margin-bottom: 0px;
-}
-
-#welcome-bar .nav-menu .menu:first-child {
-   border-right: 1px solid  rgb(159, 170, 184);
-
-}
-
 /* Options*/
 #menu .side-menu {
    background-color: white;

@@ -5,6 +5,7 @@ import os.path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
 PWD = os.path.dirname(os.path.realpath(__file__ ))
 
 ADMINS = (
@@ -15,8 +16,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mydb.sqlite',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -161,3 +162,13 @@ LOGGING = {
         },
     }
 }
+
+# Django debug toolbar
+if DEBUG:
+    try:
+        import debug_toolbar
+        MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+        INTERNAL_IPS = ('127.0.0.1',)
+        INSTALLED_APPS += ('debug_toolbar',)
+    except ImportError:
+        pass

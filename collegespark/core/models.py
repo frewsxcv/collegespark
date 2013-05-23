@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+import datetime
 
 
 class UserManager(BaseUserManager):
@@ -14,7 +15,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, username, password):
         print School.objects.all()
         school = School.objects.filter(id=1)[0]
-        user   = self.create_user(
+        user = self.create_user(
             email, username=username, school=school, password=password)
         user.is_admin = True
         user.save(using=self._db)
@@ -22,16 +23,17 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email      = models.EmailField(unique=True, max_length=255, blank=False, db_index=True)
-    username   = models.CharField(max_length=30, blank=False, unique=True)
-    major      = models.ForeignKey('Major', blank=True, null=True)
+    email = models.EmailField(unique=True, max_length=255,
+                              blank=False, db_index=True)
+    username = models.CharField(max_length=30, blank=False, unique=True)
+    major = models.ForeignKey('Major', blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True)
-    last_name  = models.CharField(max_length=30, blank=True)
-    is_active  = models.BooleanField(default=True)
-    is_admin   = models.BooleanField(default=False)
-    school     = models.ForeignKey('School')
+    last_name = models.CharField(max_length=30, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    school = models.ForeignKey('School')
 
-    USERNAME_FIELD  = 'email'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     objects = UserManager()
@@ -63,8 +65,11 @@ class User(AbstractBaseUser):
 
 
 class School(models.Model):
-    name       = models.CharField(max_length=40, unique=True, blank=False)
+    name = models.CharField(max_length=40, unique=True, blank=False)
     short_name = models.CharField(max_length=20, unique=True, blank=False)
+
+    def __unicode__(self):
+        return ""
 
     def __repr__(self):
         return "<School '{}'>".format(self.name)
@@ -72,3 +77,21 @@ class School(models.Model):
 
 class Major(models.Model):
     name = models.CharField(max_length=40)
+
+
+class Department(models.Model):
+    school = models.ForeignKey(School)
+    name = models.CharField(max_length=50)
+    short_name = models.CharField(max_length=20)
+    created_by = models.ForeignKey(User)
+    created = models.DateTimeField(default=datetime.datetime.now())
+    unique_together = ("school", "name")
+    unique_together = ("school", "short_name")
+
+
+class Class(models.Model):
+    department = models.ForeignKey(Department)
+    name = models.CharField(max_length=30)
+    created_by = models.ForeignKey(User)
+    created = models.DateTimeField(default=datetime.datetime.now())
+    unique_together = ("department", "name")
