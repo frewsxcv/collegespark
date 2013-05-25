@@ -12,7 +12,10 @@ from models import User
 @login_required(login_url='/')
 def book_view(request, school_name):
     print "here"
-    ctx = "book view"
+    ctx = {}    
+    ctx['school'] = school_name
+    ctx['mostViewedBooks'] = Book.objects.filter(school_name=request.user.school).order_by('views')[:4]
+    print ctx['mostViewedBooks'][0].image
     return render_to_response('book/book.html', ctx,
                               context_instance=RequestContext(request))
 
