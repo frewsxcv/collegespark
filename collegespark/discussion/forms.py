@@ -31,7 +31,7 @@ class ReplyForm(forms.Form):
             user_ip=self.ip)
 
         #TODO self.post.reply_count += 1
-        #self.reply.save()
+        self.reply.save()
 
 
 class CommentForm(forms.Form):
