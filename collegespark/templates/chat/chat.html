@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{%block title %} 
+   Welcome to Home page 
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<ol id="chat-msgs"></ol>
+<input id="chat-input-text" type="text">
+<input id="chat-input-button" type="button" value="send">
+{% endblock %}
+
+{% block script %}
+<script src="{{STATIC_URL}}/lib/moment/moment.min.js"></script>
+<script src="{{STATIC_URL}}/lib/socketio/socket.io.min.js"></script>
+<script src="{{STATIC_URL}}/js/chat/chat.js"></script>
+{% endblock %}
