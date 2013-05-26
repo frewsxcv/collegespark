@@ -5,12 +5,26 @@
 {% endblock %}
 
 {% block css %}
+<style>
+  #chat-msgs {
+    background-color: white;
+    height: 100px;
+    overflow: scroll;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-<ol id="chat-msgs"></ol>
-<input id="chat-input-text" type="text">
-<input id="chat-input-button" type="button" value="send">
+<div class="row-fluid">
+  <div class="span8">
+    <ol id="chat-msgs"></ol>
+    <input id="chat-input-text" type="text">
+    <input id="chat-input-button" type="button" value="send">
+  </div>
+  <div class="span4">
+    Hi
+  </div>
+</div>
 {% endblock %}
 
 {% block script %}
