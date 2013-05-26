@@ -119,12 +119,12 @@
 
 /*************************************/
 
-.post-question .content{
+.post-question .content {
     background-color: #5161bc;
 }
 
 .post-question .question {
-    margin: 20px 10px 25px 15px;
+    margin: 20px 10px 14px 15px;
     font-weight: bold;
     font-size:  26px;
     color: #FFF;
@@ -136,7 +136,7 @@
 .post .post-profile{
     background-color: #FFF;
     padding-left: 4%;
-    height: inherit;
+    padding: 0 3% 0 3%;
 }
 
 .post-profile dd {
@@ -145,10 +145,10 @@
 
 .post .profile-image {
     margin-top: -30px;
-    width: 100px;
-    height: 100px;
     float: left;
-    margin-right: 4%; 
+    margin-right: 4%;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .post .post-body, .reply-body {
@@ -156,28 +156,77 @@
     background-color: #FFF;
 }
 
-.post-body .post-title {
-   padding: 0;
-   margin: 0;
+.post-body .content {
+    min-height: 3em;
+    overflow: hidden;
+}
+
+.post-title {
+
    font-size: 12px;
    font-weight: normal;
    color: #555;
 }
 
-.post-body .author {
-    padding: 0 0 12px;
-    margin: 0 0 26px;
+.author {
+    margin-top: 7px;
     text-transform: none;
     border-bottom: 1px solid #eee;
     font-size: 10px;
     color: #999;
 }
 
-.post-body .content {
-    min-height: 3em;
+.reply-content  .profile-image {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 20px;
+}
+
+.reply-content .reply-post {
+    float: right;
+    margin-top: 7px;
+}
+
+.reply-content .comment-content {
+    margin: 16px 0  0 50px;
+}
+
+.comment-content .comment-table {
+    margin-bottom: 0;
+}
+
+.comment-table tr {
+    background-color: #edeff4;
+}
+
+.comment-table td {
+    border-top: 1px solid #FFF;
+}
+
+.comment-content .comment-text {
+    color: rgb(70, 70, 70);
+    font-size: 13px;
+}
+
+.comment-form {
+    margin-bottom: 0;
+}
+
+.comment-form .comment-input {
+    margin-bottom: 0;
+    height: 22px;
     overflow: hidden;
 }
 
+.reply-body .rely-to-post {
+    margin-top: 10px;
+}
+
+.reply-to-post .post-button {
+    margin-top: 10px;
+    width: 20%;
+}
 /*****************************/
 
 .reply {
@@ -190,16 +239,18 @@
 }
 
 
-.reply-body .profile-image {
-    width: 50px;
-    height: 50px;
-    float: left;
-    margin-right: 20px;
+.hr {
+    background-color: #bfbfbf;
+
+    margin: 30px 15px 30px 15px;
+    background: #fff url('/static/img/pw_maze_white.png') repeat-x 0 100%;
+    border: 2px dotted #ccc;
 }
 
-hr {
-    background-color: #bfbfbf;
-    border: 0;
-    height: 2px;
-    margin:20px 15px 25px 15px;
+h2 {
+font-family: Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;
+font-size: 140%;
+font-weight: bold;
+margin-bottom: 7px;
+line-height: 1.3;
 }
