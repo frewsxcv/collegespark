@@ -65,3 +65,23 @@ class Post(models.Model):
     post_topic = models.TextField()
     post_body  = models.TextField()
     user_ip    = models.GenericIPAddressField(blank=True, null=True)
+    #TODO add reply_count
+
+
+class Reply(models.Model):
+    post          = models.ForeignKey(Post)
+    created_by    = models.ForeignKey(User)
+    created       = models.DateTimeField(default=datetime.datetime.now())
+    updated       = models.DateTimeField(null=True)
+    reply_body    = models.TextField()
+    user_ip       = models.GenericIPAddressField(blank=True, null=True)
+    comment_count = models.IntegerField(blank=True, default=0)
+
+
+class ReplyComment(models.Model):
+    reply        = models.ForeignKey(Reply)
+    created_by   = models.ForeignKey(User)
+    created      = models.DateTimeField(default=datetime.datetime.now())
+    reply_body   = models.TextField()
+    comment_body = models.TextField()
+    user_ip      = models.GenericIPAddressField(blank=True, null=True)

@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/?', include(admin.site.urls)),
     url(r'^', include('collegespark.core.urls')),
     url(r'^(?P<school_name>\w+)/book', include('collegespark.book.urls')),
     url(r'^(?P<school_name>\w+)/chat', include('collegespark.chat.urls')),

@@ -14,16 +14,16 @@ width: 98.0%;
     margin-top: 2px;
 }
 
-#content [class*="span"] {
+#content [class^="span"] {
     margin-left: 5px;
 }
 
 
-#welcome-bar [class*="span"] {
+#welcome-bar [class^="span"] {
     margin-left: 5px;
 }
 
-#top-navbar [class*="span"] {
+#top-navbar [class^="span"] {
     margin-left: 5px;
 }
 
