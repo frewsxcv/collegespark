@@ -1,9 +1,17 @@
 $(function () {
     "use strict";
 
-    var prettyUnixDate = function (unix) {
-        return moment(unix).format('MMMM Do YYYY, h:mm:ss a');
+
+    var Message = function (obj) {
+        this.time = moment(obj.time).format('MMMM Do YYYY, h:mm:ss a');
+        this.text = obj.msg;
     };
+
+    Message.prototype.html = function () {
+        var html = "<li>" + this.time + ": " + this.text + "</li>";
+        return $(html);
+    };
+
 
     var Chat = function () {
         this._cache();
@@ -33,8 +41,10 @@ $(function () {
         var that = this;
         this.socket = io.connect('http://localhost:8001');
         this.socket.on('broadcast', function (data) {
-            var html = "<li>" + prettyUnixDate(data.time) + ": " + data.msg + "</li>";
+            var msg = new Message(data),
+                html = msg.html();
             that.$msgs.append(html);
+            html.get(0).scrollIntoView();
         });
     };
 
