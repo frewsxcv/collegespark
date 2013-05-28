@@ -1,5 +1,68 @@
 from django import forms
 from collegespark.discussion.models import Forum, Category, Topic, Post
+from collegespark.discussion.models import Reply, ReplyComment
+
+
+class ReplyForm(forms.Form):
+    html_body = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'html-body'}))
+
+    def __init__(self, *args, **kwargs):
+        self.user      = kwargs.pop('user', None)
+        self.post      = kwargs.pop('post', None)
+        self.post_type = kwargs.pop('post_type', None)
+        self.reply     = None
+        self.ip        = kwargs.pop('ip', None)
+
+        super(ReplyForm, self).__init__(*args, **kwargs)
+
+    def save(self):
+        html_body = self.cleaned_data['html_body']
+        self.save_reply(html_body)
+
+    def clean(self):
+        return self.cleaned_data
+
+    def save_reply(self, html_body):
+        self.reply = Reply(
+            post=self.post,
+            created_by=self.user,
+            reply_body=html_body,
+            user_ip=self.ip)
+
+        #TODO self.post.reply_count += 1
+        self.reply.save()
+
+
+class CommentForm(forms.Form):
+    comment = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'comment-input span7',
+               'placeholder': "please enter you comment"}))
+
+    def __init__(self, *args, **kwargs):
+        self.user     = kwargs.pop('user', None)
+        self.reply_id = kwargs.pop('reply_id', None)
+        self.reply    = None
+        self.comment  = None
+        self.ip       = kwargs.pop('ip', None)
+
+        super(CommentForm, self).__init__(*args, **kwargs)
+
+    def save(self):
+        comment = self.cleaned_data['comment']
+        self.reply = Reply.objects.get(id=self.reply_id)
+        self.save_comment(comment)
+
+    def clean(self):
+        return self.cleaned_data
+
+    def save_comment(self, comment_body):
+        self.comment = ReplyComment(
+            reply=self.reply,
+            created_by=self.user,
+            reply_body="NONE",
+            comment_body=comment_body)
+        self.comment.save()
 
 
 class DiscussionForm(forms.Form):
@@ -83,3 +146,5 @@ class DiscussionForm(forms.Form):
 
         self.topic.save()
         self.category.topic_count += 1
+
+

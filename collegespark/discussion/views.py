@@ -3,12 +3,17 @@ from django.template     import RequestContext
 from django.http         import HttpResponseRedirect, HttpResponse
 from django.http         import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, logout, authenticate
-from forms               import DiscussionForm
+from forms               import DiscussionForm, ReplyForm, CommentForm
 from collegespark.discussion.models import Forum, Category, Topic, Post
+from collegespark.discussion.models import Reply, ReplyComment
 import json
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.core import serializers
 
+from test import render_block_to_string
+
+from django.template import loader
+from django.template import Context
 
 def discussion_view(request, school_name):
     category_count = Category.objects.count()
@@ -58,11 +63,68 @@ def post_view(request, school_name, department, post_class):
         'discussion/post.html', ctx, context_instance=RequestContext(request))
 
 
-def post_body_view(request, school_name, post_id, post_question):
-    
-    return render_to_response(
-        'discussion/post-body.html', context_instance=RequestContext(request))
+def post_body_view(request, school_name, post_id, post_type):
+    form_msg = {}
+    ctx = {}
+    print post_type
 
+    if request.method == 'POST':
+        user = request.user
+        ip = get_ip_address(request)
+        post = get_post_by_id(post_id)
+        if post_type == "reply":
+            post_form_kwargs = {
+                "user": user, "post": post,
+                "ip": ip}
+
+            form = ReplyForm(
+                request.POST, **post_form_kwargs)
+        else:
+            reply_id = request.POST['reply_id']
+            print reply_id
+            post_form_kwargs = {
+                "user": user, "ip": ip,
+                "reply_id": reply_id}
+
+            form = CommentForm(
+                request.POST, **post_form_kwargs)
+
+        if form.is_valid():
+            print form.cleaned_data
+            form.save()
+
+            if post_type == "reply":
+                context = Context({'replys': [form.reply]})
+                return_str = render_block_to_string(
+                    'discussion/post-body.html', 'replys', context)
+            else:
+                return_str = {
+                    "reply_id": form.reply_id,
+                    "comment": form.comment.comment_body}
+
+            form_msg['message'] = return_str
+        else:
+            form_msg['errors'] = form.errors
+
+        print form_msg
+        json_ctx = json.dumps(form_msg)
+        return HttpResponse(json_ctx, mimetype='application/json')
+
+    else:
+        replyForm = ReplyForm()
+        commentForm = CommentForm()
+        post = get_post_by_id(post_id)
+        reply = get_post_reply(post_id)
+
+        ctx = {
+            "post": post,
+            "replys": reply,
+            "commentForm": commentForm,
+            "replyForm": replyForm}
+
+    return render_to_response(
+        'discussion/post-body.html', ctx,
+        context_instance=RequestContext(request))
 
 
 def discussion_form_view(request, school_name):
@@ -129,6 +191,35 @@ def paginator_data(request, page_name, school_name):
     return HttpResponse(jsonCtx, mimetype='application/json')
 
 
+def get_post_by_id(post_id):
+    return Post.objects.get(id=post_id)
+
+
+def get_post_reply(post_id):
+    replys = []
+    all_reply = Reply.objects.filter(post=post_id)
+
+    reply_list = dict([(obj.id, obj) for obj in all_reply])
+    reply_id_list = [obj.id for obj in all_reply]
+
+    objects = ReplyComment.objects.filter(reply__id__in=reply_id_list)
+
+    relation_dict = {}
+    for obj in objects:
+        relation_dict.setdefault(obj.reply_id, []).append(obj)
+
+    for id, related_items in relation_dict.items():
+        reply_list[id].comments = related_items
+
+    for id in reply_id_list:
+        print reply_list[id]
+        replys.append(reply_list[id])
+
+    print replys
+    return replys
+
+
+
 def get_topic_count(school_name, department_name):
     return Topic.objects.filter(
         category__name__iexact=department_name,
@@ -166,3 +257,7 @@ def check_for_forward_slash(name):
         return name[:-1]
     else:
         return name
+
+
+def get_ip_address(request):
+    return request.META.get('REMOTE_ADDR', None)

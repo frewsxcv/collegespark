@@ -24,16 +24,19 @@
 
 
 <div class="row-fluid post-question">
-   
    <div class="span12 content">
-      <div class="question">How do I change the Fest logo and keep the same textures</div>
+      <div class="row-fluid">
+         <div class="question offset2 span10">
+            {{post.post_topic}}
+         </div>
+   </div>
    </div> 
 </div>
 
 <div class="row-fluid post">
    <div class="span2 post-profile">
       <dl>
-        <dt><img class="profile-image" src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif"></dt>
+        <dt   class="profile-image"><img src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif"></dt>
         <dd>sdfdsf</dd>
         <dd>hjjc</dd>
         <dd>dsfdf</dd>
@@ -42,7 +45,7 @@
 
    <div class="span10 post-body">
       <div class="post-title">
-         <a href="#">Re: How do I change the Fest logo and keep the same textures</a>
+         <a href="#">Re: {{post.post_topic}}</a>
          </div>
          <p class="author">
             by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
@@ -50,7 +53,7 @@
       </p>
          
          <div class="content">
-            Hi<br><br>I'm not sure if I understand. Isn't a texture a different layer already? I think it should not change if You will only replace the text. Can You please show me a result after the modification ?
+            {{post.post_body|safe}}
          </div>                      
  
    </div>
@@ -64,60 +67,186 @@
 
    <div class="span10 reply-body">
 
+      {% block replys %}
+
+      {% for reply in replys %} 
       <div class="row-fluid">
-         <div class="span12 post-body">
+         <div id={{reply.id}} class="span12 reply-content">
+
             <div class="profile-image">
                <img src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif">
             </div>
+
             <div class="post-title"> 
-               <a href="#">Re: How do I change the Fest logo and keep the same textures</a>
+               <a href="#">Re: {{post.post_topic}} </a>
+               <p class="author">
+                  by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
+                  » Wed Mar 27, 2013 5:38 pm
+               </p>
             </div>
-            <p class="author">
-               by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
-               » Wed Mar 27, 2013 5:38 pm
-            </p>
+            
                
-            <div class="content">
-               Hi<br><br>I'm not sure if I understand. Isn't a texture a different layer already? I think it should not change if You will only replace the text. Can You please show me a result after the modification ?
+            <div class="reply-text">
+               {{ reply.reply_body|safe }}
             </div>
+
+
+            <div class="comment-content">
+            
+               <table class="table comment-table">
+                  <tbody>
+                     
+                     {% if reply.comments %}
+                        {% for comment in reply.comments %}
+                        <tr>
+                           <td><span class="comment-text">{{comment.comment_body|safe}}<span></td>
+                        </tr>
+                        {% endfor %}
+                     {% endif %}
+                     
+                     <tr class="comment-box">
+                        <td>
+                           <form action="#" class="comment-form">
+                              {{commentForm.comment}}
+                              <button type"submit" class="post-comment" hidden></button>
+                           </form>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+
          </div>
       </div>
-
-      <hr>
+      <div class="hr"></div>
+      {% endfor %}
+      {% endblock %}    
 
       <div class="row-fluid">
-         <div class="span12 post-body">
-            <div class="profile-image">
-               <img src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif">
-            </div>
-            <div class="post-title"> 
-               <a href="#">Re: How do I change the Fest logo and keep the same textures</a>
-            </div>
-            <p class="author">
-               by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
-               » Wed Mar 27, 2013 5:38 pm
-            </p>
-               
-            <div class="content">
-               Hi<br><br>I'm not sure if I understand. Isn't a texture a different layer already? I think it should not change if You will only replace the text. Can You please show me a result after the modification ?
-            </div>
+         <div class="span12 reply-to-post">
+            <form action="#" class="reply-form">
+               <h2>Your Answer</h2>
+               {{replyForm.html_body}}
+               <div>
+                  <button type="submit" class="btn post-button">Post</button>
+               </div>
+            </form>
          </div>
       </div>
-
-              
+          
    </div>
 
 </div>
+
+
+<script type="text/javascript" src="/static/ckeditor/ckeditor.js"></script>
+
+
+
 {% endblock %}
 
 {% block script %}
 <script src="{{STATIC_URL}}/js/pagination.js"></script>
 <script src="{{STATIC_URL}}/js/discussion/post.js"></script>
+<script src="{{STATIC_URL}}/lib/autosize/jquery.autosize-min.js"></script>
 
 <script type="text/javascript">
    $(function () {
-      
 
+      CKEDITOR.replace( 'id_html_body' );
+
+      $('textarea').autosize({className:'comment-input'});
+
+      $(".reply-form").submit(function(e) {
+         e.preventDefault();
+         var html_body = read_html_body();
+         var school_name = get_school_name();
+         var url = "";
+         var data = "";
+
+         url += "/" + school_name + "/discussion/" +
+                {{post.pk}} + "/reply";
+         data += "html_body=" + html_body;
+         send_to_server(url, data, "reply");
+
+      });
+
+      function read_html_body() {
+         var html_body = CKEDITOR.instances['id_html_body'].getData();
+
+         return html_body;
+      }
+
+      function send_to_server(url, data, submit_type) {
+         console.log(data);
+         console.log(url);
+         $.post(url, data, function(result) {
+            console.log(result);
+            if (submit_type === "reply")
+               set_reply_to_dom(result);
+            else
+               set_comment_to_dom(result)
+
+         });
+      }
+
+      function set_reply_to_dom(html_body) {
+         console.log(html_body["message"]);
+         $(".reply-body").prepend(html_body["message"]);
+         CKEDITOR.instances['id_html_body'].setData('');
+         scroll_top();
+      }
+
+      function set_comment_to_dom(result) {
+         if (result.hasOwnProperty("message")) {
+            var message = result["message"];
+            var reply_id = message["reply_id"];
+            var comment = message["comment"];
+            var html_tr = "<tr><td><span class='comment-text'>" + 
+                          comment + "<span></td></tr>";
+            $("#" + reply_id + " .comment-box").before(html_tr);
+            $("#" + reply_id + " .comment-input").val("");
+         }
+      }
+
+      function scroll_top() {
+         $("html, body").animate({
+            scrollTop: 0}, "slow");
+      }
+
+      $(".comment-input").keypress(function (e) {
+         if (e.which == 13) {
+            e.preventDefault();
+            console.log($(this).parent().find(".comment-input").val());
+            var comment = $(this).parent().find(".comment-input").val().trim();
+            var reply_id = $(this).closest(".reply-content").attr("id");
+            console.log(reply_id);
+            console.log(comment);
+
+            var school_name = get_school_name();
+            var url = "";
+            var data = "";
+
+            url += "/" + school_name + "/discussion/" +
+                   {{post.pk}} + "/comment";
+            data += "reply_id=" + reply_id + "&comment=" + comment;
+            send_to_server(url, data, "comment");   
+         }
+      });
+/*
+      function process_reply_click ($this) {
+         var top_parent = $this.closest(".reply-content");
+         var html_body = top_parent.find(".reply-text").html().trim();
+         console.log(html_body);
+         
+      }
+
+      function insert_quote_to_ckeditor(html_body) {
+         var html_quote = "<blockquote>" + html_body + "</blockquote>";
+         var element = CKEDITOR.dom.element.createFromHtml(html_quote)
+         CKEDITOR.instances['id_html_body'].insertElement(element);
+      }
+*/
    });
 </script>
 

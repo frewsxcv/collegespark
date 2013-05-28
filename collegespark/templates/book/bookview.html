@@ -13,8 +13,6 @@
 
 {% block css %}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/style/book/style.css">
-  <link rel="image_src" href="{{ STATIC_URL }}/img/addbooksuccess.png" />
-
 {% endblock %}
 
 {% block content %}
@@ -163,14 +161,14 @@
                             <li class ="span4">
                             <div class="thumbnail">
                               {% if relatedBookSrc.image %}
-                              <a class = "plain" href="/{{school}}/book/{{relatedBookSrc.id}}/">
+                              <a class = "plain" href="/{{school}}/book/{{relatedBookSrc.id}}">
                               <img src ="{{MEDIA_URL}}{{relatedBookSrc.image}}" alt="" width="80%" style="height:300px">
                               </a>
                               {% else %}
                                <img src ="{{STATIC_URL}}/img/noimage.jpg" alt="" width="80%" style="height:300px">
                               {% endif %}
                               <div class="caption">
-                                 <span class="related-book-title"> {{relatedBookSrc}} </b>
+                                 <span class="related-book-title"> {{relatedBookSrc}} </span>
                               </div>
                             </li>
                             {% if forloop.counter|divisibleby:3 or forloop.counter == relatedBooksURL|length %}
