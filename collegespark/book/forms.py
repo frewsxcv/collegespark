@@ -52,8 +52,10 @@ class BookInfoForm(forms.Form):
 
         if image:
             print "image"
+            print image
         else:
             print "no image"
+
         print self.errors
         self.book = Book(seller=self.seller, school_name=self.school_name,
                          isSold=False, views=0, dpt_name=dpt_name,
