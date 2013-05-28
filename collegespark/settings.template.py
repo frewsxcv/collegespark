@@ -132,6 +132,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'collegespark.core',
+    'collegespark.book',
+    'collegespark.chat',
+    'collegespark.discussion',
 )
 
 # A sample logging configuration. The only tangible logging
