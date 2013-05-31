@@ -7,17 +7,45 @@ import json
 from django.contrib.auth.decorators import login_required
 from collegespark.book.models import Book
 from models import User
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core import serializers
 
 
 @login_required(login_url='/')
 def book_view(request, school_name):
     print "here"
-    ctx = {}    
+    ctx = {}
     ctx['school'] = school_name
-    ctx['mostViewedBooks'] = Book.objects.filter(school_name=request.user.school).order_by('views')[:4]
+    ctx['mostViewedBooks'] = Book.objects.filter(school_name=request.user.school).order_by('views')[:6]
+    ctx['bookCount'] = Book.objects.filter(school_name=request.user.school).count()
     print ctx['mostViewedBooks'][0].image
     return render_to_response('book/book.html', ctx,
                               context_instance=RequestContext(request))
+
+
+def paginator_data(request, page_name, school_name):
+    print "paginator_book"
+
+    if 'page' in request.GET:
+        page_num = int(request.GET['page'])
+    else:
+        page_num = 1
+
+    if 'per_page' in request.GET:
+        print "hello"
+        per_page = int(request.GET['per_page'])
+    else:
+        per_page = 3
+
+    print per_page
+    limit_from = (page_num - 1) * per_page
+    limit_to = page_num * per_page
+    print page_name + " in paginator book "
+    print limit_from
+    print limit_to
+    data = Book.objects.filter(school_name=request.user.school).order_by('-created')[limit_from:limit_to]
+    jsonCtx = serializers.serialize('json', data)
+    return HttpResponse(jsonCtx, mimetype='application/json')
 
 
 @login_required(login_url='/')
@@ -43,7 +71,7 @@ def add_book_view(request, school_name):
             BookForm.save()
             url = "/" + school_name + "/book"
             url = url + "/"
-            url = url + str(BookForm.book.id) + "/"
+            url = url + str(BookForm.book.id)
             ctx['result'] = 'success'
             ctx['addbookURL'] = url
         else:
