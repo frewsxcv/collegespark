@@ -266,6 +266,9 @@ label.error {
 	margin-top: 10px;
 	margin-left: -5px;
 	height: 60px;
+ 	border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
 }
 
 .addBook .btn  {
@@ -275,16 +278,29 @@ label.error {
 
 
 .search-prompt {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    position: relative;
+    padding: 50px 20px 10px 0px;
+    background-color: #fff;
+    border: 1px solid lightgray;
+}
+
+.search-prompt::after {
+ 	content: "Books in Your School";
+    position: absolute;
+    top: 19px;
+    left: -8px;
+    padding: 3px 7px;
+    font-size: 25px;
     font-weight: bold;
-    font-size: 30px;
-    margin: 20px 0px 30px 0px;
+    background-color: whiteSmoke;
+    border: 1px solid #DDD;
+    color: #5a9ecc;
 }
 
 .book-list-content {
 	padding-left: 10px;
 	border: 1px solid lightgray;
-	background-color: whiteSmoke;
+	background-color: #fff;
 }
 
 .school-book-list {
@@ -309,6 +325,9 @@ label.error {
     padding: 50px 20px 10px 0px;
     background-color: #fff;
     margin: 10px 0px 10px -10px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
 }
 
 .viewed-books::after {
@@ -317,13 +336,40 @@ label.error {
     top: 19px;
     left: -8px;
     padding: 3px 7px;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bold;
     background-color: whiteSmoke;
     border: 1px solid #DDD;
     color: #5a9ecc;
 }
 
+.book-search {
+	text-align: center;
+}
+
+.navbar-search {
+	text-align: center;
+	margin-top: 15px;
+	margin-left: 20px;
+	margin-bottom: 10px;
+
+}
+
+.search-field {
+	border: 1px solid lightgray;
+	background-color: #fff;
+	margin: 5px 0px 5px -5px;
+}
+
+.search-options {
+	border: 1px solid lightgray;
+	background-color: #fff;
+	margin-left: -10px;
+}
+
+.search-box {
+	margin-left: 20px;
+}
 
 
  

@@ -153,7 +153,11 @@ def discussion_form_view(request, school_name):
             print discussionForm.cleaned_data
             discussionForm.save()
 
-            form_msg['redirect_url'] = "something"
+            url = "/%s/discussion/%s/%s" % (
+                school_name, discussionForm.post.id,
+                convert_from_space_to_dash(discussionForm.post.post_topic))
+            print url
+            form_msg['redirect_url'] = url
         else:
             print discussionForm.errors
             form_msg['errors'] = discussionForm.errors
@@ -261,6 +265,8 @@ def get_post(school_name, department_name, class_name, limit_from, limit_to):
 def convert_from_dash_to_space(name):
     return name.replace("-", " ")
 
+def convert_from_space_to_dash(name):
+    return name.replace(" ", "-")
 
 def check_for_forward_slash(name):
     if name[-1:] == "/":

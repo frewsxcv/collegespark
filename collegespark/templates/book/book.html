@@ -88,48 +88,53 @@
 	     </div>
    </div>
 
-     <div class="row-fluid">
+     <div class="row-fluid search-field">
          <div class="span4">
+             <div class="book-search">
+                 <h3> Search books: </h3>
+              </div>
          </div>
 
-         <div class = "span8">
-             <div class = "book-search">
-                 <h2 id = "rec"> Search books: </h2>
-                  <form class="navbar-search pull-left">
-                     <input type="text" class="search-query" placeholder="Search" style = "width: 200%;">
-                 </form>
-             </div>
-         </div>
-     </div>
+        <div class="span8">
+              <form class="navbar-search">
+                 <input type="text" class="search-query" placeholder="Search" style = "width: 200%;">
+             </form>
+        </div>
+    </div>
 
       <div class="row-fluid">
-         <div id = "book-filter" class = "span4">
-             <div class="form" id ="filter-find">
-                 <h2 id = "rec">Department</h2>                        
-                 <div class="control-group">
-                      <input type="text" id = "filter-find" placeholder="Your Department">
+         <div class="span4">
+             <div class="search-options">
+                <div class="search-box">
+                     <div class="form">
+                         <h3>Department</h3>                        
+                         <div class="control-group">
+                              <input type="text" placeholder="Your Department">
+                         </div>
+                         <h3>Class</h3>                        
+                         <div class="control-group">
+                             <input type="text" placeholder="Your Class">
+                         </div>
+                         <h3>Price</h3>                        
+                         <div class="control-group">
+                             <span style="font-size: 15px;"s> $ </span><input type = "text" style="width: 35px;"><span style="font-size: 20px;"> -   </span><span style="font-size: 15px;"> $ </span><input type = "text" style="width: 35px;">
+                         </div>
+                         <h3>Condition</h3>                        
+                         <div class="control-group">
+                             <select id ="filter-find"><option value = "New">New</option><option value = "Used">Used</option></select>      
+                         </div>
+                         <div class="control-group">
+                             <button class="btn btn-success" type="button" style = "width:50%;" id = "filter-find">Find</button>
+                         </div>
+                     </div>
                  </div>
-                 <h2 id = "rec">Class</h2>                        
-                 <div class="control-group">
-                     <input type="text" id = "filter-find" placeholder="Your Class">
-                 </div>
-                 <h2 id = "rec">Price</h2>                        
-                 <div class="control-group">
-                     <span style="font-size: 15px;" id = "filter-find"> $ </span><input type = "text" style="width: 35px;"><span style="font-size: 20px;"> -   </span><span style="font-size: 15px;"> $ </span><input type = "text" style="width: 35px;">
-                 </div>
-                 <h2 id = "rec">Condition</h2>                        
-                 <div class="control-group">
-                     <select id ="filter-find"><option value = "New">New</option><option value = "Used">Used</option></select>      
-                 </div>
-                 <div class="control-group">
-                     <button class="btn btn-success" type="button" style = "width:50%;" id = "filter-find">Find</button>
-                 </div>
-             </div>
+            </div>
          </div>
 
          <div class="span8">
-             <div class="search-prompt">Books in your school</div>
-             <div class="book-list-content">
+            <div class="search-prompt">
+            </div>             
+            <div class="book-list-content">
 	             <div class="school-book-list">
 	             </div>
 
