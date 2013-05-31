@@ -7,6 +7,8 @@
     var socketio = require('socket.io');
     // var _ = require('underscore');
     
+    var history = {};
+    
     var getTime = function () {
         return (new Date()).getTime();
     };
@@ -21,15 +23,25 @@
 
     server.listen(config.port);
 
-    app.get('/', function (req, res) {
-        res.send('hello world');
-    });
-
     io.sockets.on('connection', function (client) {
         client.on('send', function (data) {
+            var time = getTime();
+
+            if (history[data.room] === undefined) {
+                history[data.room] = [];
+            }
+
+            history[data.room].push({
+                "msg": data.msg,
+                "time": time
+            });
+
+            console.log(history[data.room]);
+
             io.sockets.emit('broadcast', {
                 "msg": data.msg,
-                "time": getTime()
+                "time": time,
+                "room": data.room
             });
         });
     });
