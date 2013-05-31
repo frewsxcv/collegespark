@@ -43,6 +43,10 @@ $(function () {
         });
     };
 
+    Chat.prototype.clear = function () {
+        this.$msgs.clear();
+    };
+
     Chat.prototype.connect = function () {
         var that = this;
         this.socket = io.connect('http://' + window.location.hostname + ':8001');
@@ -61,6 +65,9 @@ $(function () {
             html.get(0).scrollIntoView();
         });
         this.socket.emit('history', {'room': this.room});
+    };
+
+    Chat.prototype.switchTab = function () {
     };
 
     Chat.prototype.send = function () {
