@@ -24,6 +24,11 @@
     server.listen(config.port);
 
     io.sockets.on('connection', function (client) {
+        client.on('history', function (data) {
+            io.sockets.emit('history', {
+                "history": history[data.room] || []
+            });
+        });
         client.on('send', function (data) {
             var time = getTime();
 
@@ -33,14 +38,14 @@
 
             history[data.room].push({
                 "msg": data.msg,
+                "user": data.user,
                 "time": time
             });
-
-            console.log(history[data.room]);
 
             io.sockets.emit('broadcast', {
                 "msg": data.msg,
                 "time": time,
+                "user": data.user,
                 "room": data.room
             });
         });
