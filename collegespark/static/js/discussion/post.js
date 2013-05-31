@@ -13,11 +13,12 @@ Post.prototype.update_table = function(data) {
     console.log(data);
     for (var key in data) {
         var fields = data[key].fields;
+        console.log(fields);
         var name = fields.post_topic;
         var post_count = fields.post_count;
         rows += "<tr class='table-row' " +
                 "data-href='/" + school_name + "/discussion/" + data[key].pk + "' >" +
-                "\t<td>" + 0 + "</td>\n" +
+                "\t<td>" + count + "</td>\n" +
                 "\t<td class='post-name'>" + name + "</td>\n" +
                 "\t<td>" + post_count + "</td>\n" +
                 "</tr>\n";

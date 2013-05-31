@@ -30,9 +30,7 @@
     margin-bottom: 15px;
 }
 
-.table_header::after
-{
-    content: "Most Recent Discussion";
+.table-title {
     position: absolute;
     top: 19px;
     left: -8px;
@@ -151,7 +149,13 @@
     max-width: 100px;
 }
 
-.post .post-body, .reply-body {
+.post .post-body {
+    padding:  5px 10px 10px 15px;
+    background-color: #FFF;
+    min-height: 143px;
+}
+
+.reply .reply-body {
     padding:  5px 10px 10px 15px;
     background-color: #FFF;
 }

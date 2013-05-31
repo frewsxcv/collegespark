@@ -13,6 +13,9 @@ label.error {
     margin-bottom: 5px;
 }
 
+.signup-content {
+    background-color: white;
+}
 
 /* Options*/
 #menu .side-menu {

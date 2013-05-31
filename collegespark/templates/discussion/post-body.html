@@ -37,9 +37,7 @@
    <div class="span2 post-profile">
       <dl>
         <dt   class="profile-image"><img src="http://dev-zunuki.com/UsrData/profile-pic/profile-placeholder.gif"></dt>
-        <dd>sdfdsf</dd>
-        <dd>hjjc</dd>
-        <dd>dsfdf</dd>
+        <dd>Hormoz Tarevern</dd>
       </dl>
    </div>
 
@@ -48,7 +46,7 @@
          <a href="#">Re: {{post.post_topic}}</a>
          </div>
          <p class="author">
-            by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
+            by <a href="#" style="color: #339933;" class="username-coloured">Hormoz</a>
          » Wed Mar 27, 2013 5:38 pm
       </p>
          
@@ -80,7 +78,7 @@
             <div class="post-title"> 
                <a href="#">Re: {{post.post_topic}} </a>
                <p class="author">
-                  by <a href="#" style="color: #339933;" class="username-coloured">teitbite</a>
+                  by <a href="#" style="color: #339933;" class="username-coloured">Hormoz</a>
                   » Wed Mar 27, 2013 5:38 pm
                </p>
             </div>
@@ -154,8 +152,8 @@
    $(function () {
 
       CKEDITOR.replace( 'id_html_body' );
-
       $('textarea').autosize({className:'comment-input'});
+      setCommentBoxEvent();
 
       $(".reply-form").submit(function(e) {
          e.preventDefault();
@@ -193,6 +191,7 @@
       function set_reply_to_dom(html_body) {
          console.log(html_body["message"]);
          $(".reply-body").prepend(html_body["message"]);
+         setCommentBoxEvent();
          CKEDITOR.instances['id_html_body'].setData('');
          scroll_top();
       }
@@ -214,25 +213,27 @@
             scrollTop: 0}, "slow");
       }
 
-      $(".comment-input").keypress(function (e) {
-         if (e.which == 13) {
-            e.preventDefault();
-            console.log($(this).parent().find(".comment-input").val());
-            var comment = $(this).parent().find(".comment-input").val().trim();
-            var reply_id = $(this).closest(".reply-content").attr("id");
-            console.log(reply_id);
-            console.log(comment);
+      function setCommentBoxEvent() {
+         $(".comment-input").keypress(function (e) {
+            if (e.which == 13) {
+               e.preventDefault();
+               console.log($(this).parent().find(".comment-input").val());
+               var comment = $(this).parent().find(".comment-input").val().trim();
+               var reply_id = $(this).closest(".reply-content").attr("id");
+               console.log(reply_id);
+               console.log(comment);
 
-            var school_name = get_school_name();
-            var url = "";
-            var data = "";
+               var school_name = get_school_name();
+               var url = "";
+               var data = "";
 
-            url += "/" + school_name + "/discussion/" +
-                   {{post.pk}} + "/comment";
-            data += "reply_id=" + reply_id + "&comment=" + comment;
-            send_to_server(url, data, "comment");   
-         }
-      });
+               url += "/" + school_name + "/discussion/" +
+                      {{post.pk}} + "/comment";
+               data += "reply_id=" + reply_id + "&comment=" + comment;
+               send_to_server(url, data, "comment");   
+            }
+         });
+      }
 /*
       function process_reply_click ($this) {
          var top_parent = $this.closest(".reply-content");

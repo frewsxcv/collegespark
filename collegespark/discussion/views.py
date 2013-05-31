@@ -18,7 +18,9 @@ from django.template import Context
 def discussion_view(request, school_name):
     category_count = Category.objects.count()
 
-    ctx = {"category_count": category_count}
+    ctx = {
+        "school_name": school_name,
+        "category_count": category_count}
     return render_to_response(
         'discussion/discussion.html', ctx, context_instance=RequestContext(request))
 
@@ -26,7 +28,9 @@ def discussion_view(request, school_name):
 def category_view(request, school_name):
     category_count = Category.objects.count()
 
-    ctx = {"category_count": category_count}
+    ctx = {
+        "school_name": school_name,
+        "category_count": category_count}
 
     return render_to_response(
         'discussion/category.html', ctx, context_instance=RequestContext(request))
@@ -40,6 +44,8 @@ def topic_view(request, school_name, department):
     topic_count = get_topic_count(school_name, department_name)
 
     ctx = {
+        "school_name": school_name,
+        "department_name": department,
         "topic_name": department_name,
         "topic_count": topic_count}
     print ctx
@@ -54,6 +60,9 @@ def post_view(request, school_name, department, post_class):
     post_count = get_post_count(school_name, department_name, class_name)
 
     ctx = {
+        "school_name": school_name,
+        "department_name": department,
+        "class_name": post_class,
         "topic_name": department_name,
         "post_name": class_name,
         "post_count": post_count
@@ -94,7 +103,7 @@ def post_body_view(request, school_name, post_id, post_type):
             form.save()
 
             if post_type == "reply":
-                context = Context({'replys': [form.reply]})
+                context = Context({'replys': [form.reply], 'commentForm': CommentForm()})
                 return_str = render_block_to_string(
                     'discussion/post-body.html', 'replys', context)
             else:
@@ -117,6 +126,7 @@ def post_body_view(request, school_name, post_id, post_type):
         reply = get_post_reply(post_id)
 
         ctx = {
+            "school_name": school_name,
             "post": post,
             "replys": reply,
             "commentForm": commentForm,

@@ -14,9 +14,25 @@
    <div class="row-fluid">      
       <div class="span12">
          <ul class="breadcrumb">
-            <li><a href="#">Home</a> <span class="divider">/</span></li>
-            <li><a href="#">Library</a> <span class="divider">/</span></li>
-            <li class="active">Data</li>
+            <li>
+               <a href="/{{school_name}}">{{user.school.name}}</a>
+               <span class="divider">/</span>
+            </li>
+            <li>
+               <a href="/{{school_name}}/discussion">discussion</a>
+               <span class="divider">/</span>
+            </li>
+            <li>
+               <a href="/{{school_name}}/discussion/departments">{{topic_name}}</a>
+               <span class="divider">/</span>
+            </li>
+            <li>
+               <a href="/{{school_name}}/discussion/{{class_name}}">{{post_name}}</a>
+               <span class="divider">/</span>
+            </li>
+            <li class="active">
+               Posts
+            </li>
          </ul>
       </div>
    </div>
@@ -26,7 +42,7 @@
 
 <div class="row-fluid">
    <div class="span12 table_header">
-
+      <div class="table-title">Topics List</div>
       <div class="row-fluid post-search">
          <div class="span12">
             <form>
@@ -59,7 +75,7 @@
 
       <div class="row-fluid">
          <div class="span4  create-post">
-            <a href="departments">
+            <a href="/{{school_name}}/discussion/post">
                <button class="btn btn-success">Create a New Post</button>
             </a>
          </div>
