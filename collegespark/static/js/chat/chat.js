@@ -23,6 +23,32 @@ $(function () {
         this._cache();
         this._events();
         this.connect();
+
+        var that = this;
+        $(".chat-tab").click(function (elem) {
+            that.switchTab(elem);
+        });
+
+        $("#chat-tab-add").click(function () {
+            var newTab = prompt("Enter the new tab name"),
+                $elem = $("<li class='chat-tab'>" +
+                    "<a href='#'>" + newTab + "</a></li>");
+            if (newTab) {
+                $elem.click(function (elem) {
+                    that.switchTab(elem);
+                }); 
+                $("#chat-tab-add").before($elem);
+            }
+        });
+    };
+
+    Chat.prototype.switchTab = function (elem) {
+        var $elem = $(elem.target);
+        $(".chat-tab").removeClass("active");
+        $elem.parent().addClass("active");
+        this.clear();
+        this.room = $elem.text();
+        this.socket.emit('history', {'room': this.room});
     };
 
     Chat.prototype._cache = function () {
@@ -44,7 +70,7 @@ $(function () {
     };
 
     Chat.prototype.clear = function () {
-        this.$msgs.clear();
+        this.$msgs.empty();
     };
 
     Chat.prototype.connect = function () {
@@ -56,7 +82,6 @@ $(function () {
                     html = msg.html();
                 that.$msgs.append(html);
             });
-            that.$msgs.children().last().get(0).scrollIntoView();
         });
         this.socket.on('broadcast', function (data) {
             var msg = new Message(data),
@@ -65,9 +90,6 @@ $(function () {
             html.get(0).scrollIntoView();
         });
         this.socket.emit('history', {'room': this.room});
-    };
-
-    Chat.prototype.switchTab = function () {
     };
 
     Chat.prototype.send = function () {
