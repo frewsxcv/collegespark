@@ -1,3 +1,19 @@
+label.valid {
+    width: 10%;
+    background: url(/static/img/valid.png) center center no-repeat;
+    text-indent: -9999px;
+    margin-left: -28px;
+    float: left;
+    margin-top: 5px;
+}
+
+label.error {
+    font-weight: bold;
+    color: red;
+    margin-bottom: 5px;
+}
+
+
 .search-bar {
     margin: 10px 0;
 }
@@ -105,6 +121,16 @@
     margin-left: 155px;
 }
 
+.discussion-form .input-box {
+    float: left;
+    margin-left: 10px;
+}
+
+.discussion-form .help-star {
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
 /*****************************************/
 
 .category-table .category-header{

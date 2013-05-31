@@ -23,12 +23,12 @@
             <div class="control-group">
                <label class="control-label" for="inputDepartment">Department</label>
                <div class="controls">
-                  <div class="input-append">
+                  <div class="input-append input-box">
                      {{ discussionForm.department }}
                      <span class="add-on">*</span>
                   </div>
 
-                  <a href="#" class="help-text" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                  <a href="#" class="help-text help-star" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
                      <i class="icon-question-sign"></i>
                   </a>   
                </div>
@@ -37,12 +37,12 @@
             <div class="control-group">
                <label class="control-label" for="inputClass">Class</label>
                <div class="controls">
-                  <div class="input-append">
+                  <div class="input-append input-box">
                      {{ discussionForm.class_name }}
                      <span class="add-on">optional</span>
                   </div>
 
-                  <a href="#" class="help-text" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                  <a href="#" class="help-text help-star" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
                      <i class="icon-question-sign"></i>
                   </a>
                </div>
@@ -55,12 +55,12 @@
             <div class="control-group">
                <label class="control-label" for="inputDepartment">Title:</label>
                <div class="controls">
-                  <div class="input-append">
+                  <div class="input-append input-box">
                      {{ discussionForm.post_topic }}
                      <span class="add-on">*</span>
                   </div>
 
-                  <a href="#" class="help-text" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
+                  <a href="#" class="help-text help-star" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
                      <i class="icon-question-sign"></i>
                   </a>
 
@@ -70,7 +70,7 @@
             <div class="control-group">
                <label class="control-label" for="inputDepartment">Post:</label>
                <div class="controls">
-                  {{ discussionForm.post_body }}
+                     {{ discussionForm.post_body }}
                   <span class="add-on">*</span>
                   <a href="#" class="help-text" data-toggle="popover" data-placement="right" data-content="dssfdfsdfsd" >
                      <i class="icon-question-sign"></i>
@@ -96,6 +96,6 @@
 
    <script src="{{ STATIC_URL }}/lib/wysihtml5/js/wysihtml5-0.3.0.js"></script>
    <script src="{{ STATIC_URL }}/lib/wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>
-
+   <script src="http://alittlecode.com/files/jQuery-Validate-Demo/assets/js/jquery.validate.min.js"></script>
    <script src="{{ STATIC_URL }}/js/discussion/postdiscussion.js"></script>
 {% endblock %}
