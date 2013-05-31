@@ -25,7 +25,7 @@
 
     io.sockets.on('connection', function (client) {
         client.on('history', function (data) {
-            io.sockets.emit('history', {
+            client.emit('history', {
                 "history": history[data.room] || []
             });
         });
