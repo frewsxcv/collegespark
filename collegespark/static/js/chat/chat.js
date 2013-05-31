@@ -86,8 +86,10 @@ $(function () {
         this.socket.on('broadcast', function (data) {
             var msg = new Message(data),
                 html = msg.html();
-            that.$msgs.append(html);
-            html.get(0).scrollIntoView();
+            if (data.room === that.room) {
+                that.$msgs.append(html);
+                html.get(0).scrollIntoView();
+            }
         });
         this.socket.emit('history', {'room': this.room});
     };
