@@ -7,7 +7,7 @@
          <ul class="nav nav-pills">
             <li class="menu"><a href="{% url 'book' user.school.short_name %}">Book</a></li>
             <li class="menu"><a href="{% url 'chat' user.school.short_name %}">Chat</a></li>
-            <li class="menu"><a href="#">Dicussion</a></li>
+            <li class="menu"><a href="{% url 'discussion' user.school.short_name %}">Dicussion</a></li>
             <li class="welcome-text">
                <a href="#">Cal Poly Board</a>
             </li>
