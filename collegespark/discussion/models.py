@@ -66,6 +66,10 @@ class Post(models.Model):
     post_body  = models.TextField()
     user_ip    = models.GenericIPAddressField(blank=True, null=True)
     #TODO add reply_count
+    '''TODO add for preformance (denormilize)
+        topic_name,
+        category_name
+    '''
 
 
 class Reply(models.Model):

@@ -11,10 +11,11 @@ Category.prototype.update_table = function(data) {
 
     for (var key in data) {
         var fields = data[key].fields;
+        console.log(fields.topic_count);
         var name = fields.name;
         var topic_count = fields.topic_count;
         rows += "<tr class='category-row'>\n" +
-                "\t<td>" + 0 + "</td>\n" +
+                "\t<td>" + count + "</td>\n" +
                 "\t<td class='category-name'>" + name + "</td>\n" +
                 "\t<td>" + topic_count + "</td>\n" +
                 "</tr>\n";

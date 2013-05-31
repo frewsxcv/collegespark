@@ -6,14 +6,20 @@ body {
 
 /* top-navbar */
 
+.login-content {
+    background: rgb(23, 161, 199);
+}
+
 #top-navbar {
 	margin-bottom: 0px;
 }
 
 #top-navbar .navbar-inner {
-	background: rgb(23, 161, 199);
 	padding: 0;
 	min-height: 70px;
+    background: none;
+    border: none;
+    box-shadow: none;
 }
 
 #top-navbar .brand {
@@ -51,10 +57,12 @@ body {
 
 #signup-info img {
    box-sizing: border-box;
+   margin-left: 25px;
+   margin-bottom: 20px;
 }
 
 #signup-form {
-   margin-top: 35px;
+   margin-top: 15px;
    margin-bottom: 20px;
 }
 
@@ -80,6 +88,10 @@ body {
 	background-image: linear-gradient(top, #627aad, #3b5998);
 	border-color: #3b5998 #3b5998 #263961;
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+#signup-info {
+    margin-top: 105px;
 }
 
 
