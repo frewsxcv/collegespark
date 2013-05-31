@@ -92,6 +92,7 @@ label.error {
 /* add book result page*/
 .result-image {
 	margin: 20px 0px 10px 20px;
+	text-align: center;
 }
 
 .result-image img {
@@ -101,6 +102,7 @@ label.error {
 
 .result-msg {
 	margin: 10px 0px 10px 10px;
+	text-align: center;
 }
 
 .result-msg .error {
@@ -112,7 +114,8 @@ label.error {
 }
 
 .result-url {
-	margin: 0px 0px 20px 100px;
+	margin: 0px 0px 20px 00px;
+	text-align: center;
 }
 
 .result-url a {
